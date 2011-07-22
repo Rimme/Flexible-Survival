@@ -87,15 +87,18 @@ instead of addfeating the basic feats:
 	if stamina of player is greater than 14:
 		addfeat "Spartan Diet" with "You don't need 2 liters of water and great feasts to keep you going! You become thirsty and hungry slower.";
 		addfeat "Iron Stomach" with "Your belly has nano resistance! Eating or drinking infectious items fails to change you.";
+		addfeat "Toughened" with "You take less damage than others(-20% damage)";
 	if "Sterile" is not listed in feats of player, addfeat "Fertile" with "You are blessed by the rabbit totem! You are especially good at producing children.";
 	if "Fertile" is not listed in feats of player, addfeat "Sterile" with "You are incapable of mothering a child.";
 	if intelligence of player is greater than 14:
 		addfeat "Fast Learner" with "You assimilate new information rapidly. -20% xp needed to level.";
 		addfeat "Expert Medic" with "You are especially good at using medkits, +25% hitpoints restored per use, and a 20% chance of saving a kit when it should be lost.";
 	if perception of player is greater than 14:
+		addfeat "Magpie Eyes" with "You love shining things. Especially shining things on the defeated bodies of your enemies. Increased odds of drops.";
 		addfeat "Expert Hunter" with "Your chances of hunting a specific critter with the hunt command increases from 3 X to 5 X.";
 	if dexterity of player is greater than 14:
 		addfeat "Martial Artist" with "You have basic martial arts training, increasing the damage you cause when you have no weapon.";
+		addfeat "Stealthy" with "Your chance of running into a monster is decreased while you are scavenging or exploring.";
 	if "Martial Artist" is listed in feats of player:
 		addfeat "Natural Armaments" with "You gain additional power based on the mutation of your body, borrowing the natural weapons of your infection.";
 		addfeat "Black Belt" with "Your martial artistry is amazing. Your damage increases furher while unarmed, and you have a small(10%) chance of avoiding hits that would otherwise have landed.";
