@@ -15,7 +15,7 @@ Use automap hyperlinks translates as (- Constant AUTOMAP_HYPERLINKS 1; -).
 [Include Text Capture by Eric Eve.
 Use maximum capture buffer length of at least 512.]
 
-Include (- 
+Include (-
 
 Constant AUTOMAP_CHAR_IN 3;
 Constant AUTOMAP_CHAR_OUT 4;
@@ -75,7 +75,7 @@ Global MAP_HEIGHT = 0;
 				if ( (+ current zoom +) == (+ map absent +) )
 					return;
 				if (~~Printed_nomalloc_message) {
-					print "[Your interpreter does not support dynamic memory allocation.  Automap features will not function.]^";
+					print "[Your interpreter does not support dynamic memory allocation. Automap features will not function.]^";
 					Printed_nomalloc_message = true;
 				}
 				(+ current zoom +) = (+ map absent +);
@@ -107,7 +107,7 @@ Global MAP_HEIGHT = 0;
 	MAP_WIDTH = cols;
 	MAP_HEIGHT = rows;
 ];
-	
+
 [ Check_for_malloc rv;
 	#ifndef AUTOMAP_ALLOCATE_STATIC;
 	@gestalt 7 0 rv;
@@ -122,9 +122,9 @@ Global MAP_HEIGHT = 0;
 To decide whether there is no dynamic allocation conflict:
 	(- Check_for_malloc() -).
 
-To reserve automap memory of (rows - a number) rows by (cols - a number) cols/columns :  (- Reserve_Map_Memory ({rows}, {cols}) ;-).
-To reserve automap memory of (cols - a number) cols/columns by (rows - a number) rows:  (- Reserve_Map_Memory ({rows}, {cols}) ;-).
-To reserve automap memory of (rows - a number) by (cols - a number):  (- Reserve_Map_Memory ({rows}, {cols}) ;-).
+To reserve automap memory of (rows - a number) rows by (cols - a number) cols/columns : (- Reserve_Map_Memory ({rows}, {cols}) ;-).
+To reserve automap memory of (cols - a number) cols/columns by (rows - a number) rows: (- Reserve_Map_Memory ({rows}, {cols}) ;-).
+To reserve automap memory of (rows - a number) by (cols - a number): (- Reserve_Map_Memory ({rows}, {cols}) ;-).
 To reserve automap memory of (rows - a number) rows: (- Reserve_Map_Memory ({rows}, VM_ScreenWidth()-2); -).
 
 Include Basic Screen Effects by Emily Short.
@@ -133,70 +133,70 @@ Include Basic Screen Effects by Emily Short.
 A mappable room has a number called map_x.
 A mappable room has a number called map_y.
 
-A mappable room can be currently_mapped.  A mappable room is usually not currently_mapped.]
+A mappable room can be currently_mapped. A mappable room is usually not currently_mapped.]
 
-A room can be mappable or unmappable.  A room is usually mappable.
-A room has a number called map_x.  A room has a number called map_y.
-A room can be currently_mapped.  A room is usually not currently_mapped.
+A room can be mappable or unmappable. A room is usually mappable.
+A room has a number called map_x. A room has a number called map_y.
+A room can be currently_mapped. A room is usually not currently_mapped.
 
 To decide what number is the distance (d - a direction) from (r - a room): decide on 1.
 
-[Coregionality relates mappable rooms to each other in groups.  The verb to be coregional with implies the coregionality relation.]
-Coregionality relates rooms to each other in groups.  The verb to be coregional with implies the coregionality relation.
+[Coregionality relates mappable rooms to each other in groups. The verb to be coregional with implies the coregionality relation.]
+Coregionality relates rooms to each other in groups. The verb to be coregional with implies the coregionality relation.
 
-Map zoomedness is a kind of value.  The Map zoomednesses are map zoomed out, map zoomed in, and map absent.
+Map zoomedness is a kind of value. The Map zoomednesses are map zoomed out, map zoomed in, and map absent.
 
-Current zoom is a map zoomedness that varies.  [The current zoom is map zoomed in.] [The current zoom is map absent.]
+Current zoom is a map zoomedness that varies.[@Tag:NotSaved] [The current zoom is map zoomed in.] [The current zoom is map absent.]
 
 To report dynamic allocation conflict:
 	say "[bracket]Your interpreter does not support dynamic allocation, so the automap will not function.[close bracket][line break]";
 	now current zoom is map absent;
-		
-Zooming in is an action out of world applying to nothing.  Understand "zoom in" as zooming in.
-Carry out zooming in: if there is no dynamic allocation conflict begin; say "Zooming in!"; now current zoom is map zoomed in; otherwise; report dynamic allocation conflict; end if.
 
-Zooming out is an action out of world applying to nothing.  Understand "zoom out" as zooming out.
+Zooming in is an action out of world applying to nothing. Understand "zoom in" as zooming in.
+Carry out zooming in: if there is no dynamic allocation conflict begin; say "Zooming in!"; now current zoom is map zoomed in; else; report dynamic allocation conflict; end if.
+
+Zooming out is an action out of world applying to nothing. Understand "zoom out" as zooming out.
 Carry out zooming out:
-	if there is no dynamic allocation conflict begin; say "Zooming out!"; now current zoom is map zoomed out; otherwise; report dynamic allocation conflict; end if.
+	if there is no dynamic allocation conflict begin; say "Zooming out!"; now current zoom is map zoomed out; else; report dynamic allocation conflict; end if.
 
-Zooming away is an action out of world applying to nothing.  Understand "zoom away" as zooming away.  Carry out zooming away: say "Removing map."; now current zoom is map absent.
+Zooming away is an action out of world applying to nothing. Understand "zoom away" as zooming away. Carry out zooming away: say "Removing map."; now current zoom is map absent.
 
-ZoomingMisc is an action out of world applying to nothing.  Understand "zoom" as zoomingmisc.
-Carry out zoomingmisc: 
+ZoomingMisc is an action out of world applying to nothing. Understand "zoom" as zoomingmisc.
+Carry out zoomingmisc:
 	if there is no dynamic allocation conflict begin;
 		if current zoom is map zoomed in begin;
 			try zooming out;
-		otherwise if current zoom is map zoomed out;
+		else if current zoom is map zoomed out;
 			try zooming away;
-		otherwise;
+		else;
 			try zooming in;
 		end if;
-	otherwise;
+	else;
 		report dynamic allocation conflict;
 	end if.
 
 
-Map displayness is a kind of value.  The map displaynesses are map display ascii, map display automatic, map display fancy, map display unicode. Current displayness is a map displayness that varies.
+Map displayness is a kind of value. The map displaynesses are map display ascii, map display automatic, map display fancy, map display unicode. Current displayness is a map displayness that varies.[@Tag:NotSaved]
 
-Map displaying unicode is an action out of world applying to nothing.  Understand "map unicode" as map displaying unicode.  Carry out map displaying unicode: now current displayness is map display unicode; say "Displaying map with unicode character set.".
+Map displaying unicode is an action out of world applying to nothing. Understand "map unicode" as map displaying unicode. Carry out map displaying unicode: now current displayness is map display unicode; say "Displaying map with unicode character set.".
 
-Map displaying fancy is an action out of world applying to nothing.  Understand "map fancy" as map displaying fancy.  Understand "map font 3" as map displaying fancy.  Understand "map beyond zork" as map displaying fancy.  Carry out map displaying fancy: now current displayness is map display fancy; say "Displaying map with fancy character set.".
+Map displaying fancy is an action out of world applying to nothing. Understand "map fancy" as map displaying fancy. Understand "map font 3" as map displaying fancy. Understand "map beyond zork" as map displaying fancy. Carry out map displaying fancy: now current displayness is map display fancy; say "Displaying map with fancy character set.".
 
-Map displaying ascii is an action out of world applying to nothing.  Understand "map simple/ascii/plain" as map displaying ascii.  Carry out map displaying ascii: now current displayness is map display ascii; say "Displaying map with simple character set.".
-Gargoyle workaround is an action out of world applying to nothing.  Understand "gargoyle bug workaround" as gargoyle workaround.  Carry out gargoyle workaround: now current displayness is map display ascii; say "Activating workaround for buggy interpreter.".
+Map displaying ascii is an action out of world applying to nothing. Understand "map simple/ascii/plain" as map displaying ascii. Carry out map displaying ascii: now current displayness is map display ascii; say "Displaying map with simple character set.".
+Gargoyle workaround is an action out of world applying to nothing. Understand "gargoyle bug workaround" as gargoyle workaround. Carry out gargoyle workaround: now current displayness is map display ascii; say "Activating workaround for buggy interpreter.".
 
-Map displaying automatic is an action out of world applying to nothing.  Understand "map auto" as map displaying automatic.  Carry out map displaying automatic: now current displayness is map display automatic; say "Displaying map with automatic character set."
+Map displaying automatic is an action out of world applying to nothing. Understand "map auto" as map displaying automatic. Carry out map displaying automatic: now current displayness is map display automatic; say "Displaying map with automatic character set."
 
-Automap work is an activity.  ["Catchall activity in case the author wants to do something different while doing automap related activity."]
+Automap work is an activity. ["Catchall activity in case the author wants to do something different while doing automap related activity."]
 
-Automap exploring is an activity.  ["Check a room, and join all adjacent rooms which are currently_mapped to its automap region."]
+Automap exploring is an activity. ["Check a room, and join all adjacent rooms which are currently_mapped to its automap region."]
 
 Automap drawing is an activity. ["writing the array that shows the automap."]
 
 To decide whether (dir - a direction) is region preserving:
    if dir is north or dir is east or dir is west or dir is south or dir is northeast or dir is southeast or dir is northwest or dir is southwest, decide yes;
    if dir is up or dir is down or dir is inside or dir is outside, decide no;
-   say "Error: Bad direction [dir]!"; decide no.
+   say "Error: Bad direction [dir]!"; decide no;
 
 To decide what number is the delta x of (dir - a direction):
    if dir is west or dir is northwest or dir is southwest, decide on -1;
@@ -224,7 +224,7 @@ To decide what number is east west path: decide on 1.
 To decide what number is ne sw path: decide on 35.
 To decide what number is nw se path: decide on 36.
 To decide what number is diagonal cross: decide on 90.
-To decide what number is orthogonal cross: decide on 91. 
+To decide what number is orthogonal cross: decide on 91.
 To decide what number is south wall: decide on 38.
 To decide what number is north wall: decide on 39.
 To decide what number is east wall: decide on 40.
@@ -275,7 +275,7 @@ To decide what number is full question arrow: decide on 126.
 
 To decide what number is map width:
 	(- MAP_WIDTH -);
-To decide what number is map height: 
+To decide what number is map height:
 	(- MAP_HEIGHT -);
 
 
@@ -284,7 +284,7 @@ Section 2 - Exploration - determining how rooms should be placed relative to eac
 [ Unmap Room ]
 To unmap (r - a room):
 	now r is not coregional with r;
-	now r is not currently_mapped.
+	now r is not currently_mapped;
 
 To remap/explore (r - a room):
 	unless r is explored, say "Error exploring [r] - BUG.";
@@ -329,14 +329,14 @@ To recenter the region of (r - a mappable room):
 	let min_x be the map_x of r;
 	let min_y be the map_y of r;
 	repeat with loop_room running through all mappable rooms coregional with r begin;
-		if the map_x of loop_room is less than min_x, now min_x is the map_x of loop_room;
-		if the map_y of loop_room is less than min_y, now min_y is the map_y of loop_room;
+		if the map_x of loop_room < min_x, now min_x is the map_x of loop_room;
+		if the map_y of loop_room < min_y, now min_y is the map_y of loop_room;
 	end repeat;
 	repeat with loop_room running through all mappable rooms coregional with r begin;
 		now the map_x of loop_room is the map_x of loop_room - min_x;
 		now the map_y of loop_room is the map_y of loop_room - min_y;
 	end repeat.
-		
+
 
 [ Join Regions : decide whether (nr - mappable room) is placed (dx - a number) and (dy - a number) from (or - mappable room):]
 To decide whether (new room - mappable room) is placed (dx - a number) and (dy - a number) from (old room - mappable room):
@@ -356,18 +356,18 @@ To decide whether (new room - mappable room) is placed (dx - a number) and (dy -
 	let delta_y be (map_y of old room) + dy - (map_y of new room);
 	repeat with loop_room running through all mappable rooms coregional with new room
 	begin;
-		change map_x of loop_room to (map_x of loop_room) + (delta_x);
-		change map_y of loop_room to map_y of loop_room + delta_y;
+		now map_x of loop_room is (map_x of loop_room) + (delta_x);
+		now map_y of loop_room is map_y of loop_room + delta_y;
 	end repeat;
 	now old room is coregional with new room;
 	recenter the region of old room;
 	decide yes.
-	
+
 To decide whether (r - a room) is not explored:
-	if r is explored, decide no; decide yes.	
-	
+	if r is explored, decide no; decide yes.
+
 To decide whether (r - a room) has an exit to the/-- (d - a direction):
-	if using the automap hide paths through closed doors option and the room-or-door d from r is a closed door, decide no;
+	if [using the automap hide paths through closed doors option and ]the room-or-door d from r is a closed door, decide no;
 	If the room d from r is a room, decide yes; decide no.
 
 Section 3 - Drawing the map - Writing to the character array
@@ -386,14 +386,14 @@ To place (ch - number) at (x - a number) and (y - a number):
 		Automap_Chars -> ( {y} * MAP_WIDTH + {x} ) = {ch};
 	}
 	-)
-	
+
 To decide what number is the character at (sq - a number):
 	(- Automap_Chars -> {sq} -);
 
 To decide what number is room size: if current zoom is map zoomed in, decide on 4; decide on 2.
 
-[Map drawn room is a mappable room that varies.  Map drawn direction is a direction that varies.]
-Map drawn room is a room that varies.  Map drawn direction is a direction that varies.
+[Map drawn room is a mappable room that varies.[@Tag:NotSaved] Map drawn direction is a direction that varies.[@Tag:NotSaved]]
+Map drawn room is a room that varies.[@Tag:NotSaved] Map drawn direction is a direction that varies.[@Tag:NotSaved]
 
 [ Draw Path ]
 To draw a path from (room x - a number) and (room y - a number) to (dir - a direction) for (dist - a number) with (ch - a number):
@@ -409,21 +409,21 @@ To draw a path from (room x - a number) and (room y - a number) to (dir - a dire
 		let sq be (room y * map width) + room x;
 		let ch2 be the character at sq;
 		if ch2 is 32 or ch2 is ch begin; do nothing; [ Drawing over a space or a matching character is normal. ]
-		otherwise if ch2 is 90 or ch2 is 91; now ch1 is ch2; [ Drawing anything over an X or + is a nop. ]
-		otherwise if ch1 is 35 or ch1 is 36; now ch1 is 90; [ Drawing a ne/sw over nw/se or v.v makes an X. ]
-		[otherwise if ch1 is 35 or ch1 is 36; say "writing [ch] over [ch2] for X at ([room x], [room y])::[sq]."; now ch is 90;]
-		otherwise if ch1 is 1 or ch1 is 2; now ch1 is 91; [ Drawing a n/s over e/w or v.v makes a +.]
-		otherwise; say "Draw Path got value with [ch1] over [ch2] at ([room x], [room y]): BUG.";
+		else if ch2 is 90 or ch2 is 91; now ch1 is ch2; [ Drawing anything over an X or + is a nop. ]
+		else if ch1 is 35 or ch1 is 36; now ch1 is 90; [ Drawing a ne/sw over nw/se or v.v makes an X. ]
+		[else if ch1 is 35 or ch1 is 36; say "writing [ch] over [ch2] for X at ([room x], [room y])::[sq]."; now ch is 90;]
+		else if ch1 is 1 or ch1 is 2; now ch1 is 91; [ Drawing a n/s over e/w or v.v makes a +.]
+		else; say "Draw Path got value with [ch1] over [ch2] at ([room x], [room y]): BUG.";
 		end if;
 		if ch1 is not ch2, place ch1 at room x and room y;
 		now dist is dist - 1;
 		now room x is room x + dx;
 		now room y is room y + dy;
 	end while.
-	
+
 To decide what number is the maximum of (x - a number) and (y - a number): if (x < y), decide on y; decide on x.
 To decide what number is the minimum of (x - a number) and (y - a number): if (x < y), decide on x; decide on y.
-	
+
 Include (-
 [ ClearMap i;
 	!for (i = 0: i < MAP_WIDTH * MAP_HEIGHT: ++ i)
@@ -449,8 +449,8 @@ To decide whether the map is drawn:
 		let max_x be the map_x of location;
 		let max_y be the map_y of location;
 		repeat with loop_room running through the mappable rooms coregional with location begin;
-			if the map_x of loop_room is greater than max_x, now max_x is the map_x of loop_room;
-			if the map_y of loop_room is greater than max_y, now max_y is the map_y of loop_room;
+			if the map_x of loop_room > max_x, now max_x is the map_x of loop_room;
+			if the map_y of loop_room > max_y, now max_y is the map_y of loop_room;
 		end repeat;
 		let map_min_x be 0;
 		[ If the width of the drawn map is no more than the width allocated, center the map horizontally.]
@@ -461,8 +461,8 @@ To decide whether the map is drawn:
 		[say "Would center x at [((room size * (1 + max_x)) - map width) / 2] == ([room size] * [1 + max_x] - [map width]) / 2.";
 		if 2 + (room size) * (1 + max_x) >= map width begin;
 			[now map_min_x is the maximum of -2 and (the minimum of (2 + (1 + the map_x of location) * (room size) - map width / 2) and ((1 + max_x) * room size - map width));] [ I have no idea why the parens cause this line to fail.]
-			now map_min_x is the maximum of -2 and (the minimum of (2 + (1 + the map_x of location) * (room size) - map width / 2) and (1 + max_x) * room size - map width); 
-		otherwise;
+			now map_min_x is the maximum of -2 and (the minimum of (2 + (1 + the map_x of location) * (room size) - map width / 2) and (1 + max_x) * room size - map width);
+		else;
 			now map_min_x is (room size * (1 + max_x) - map width) / 2;
 		end if;]
 		if 1 is 1 begin;
@@ -484,9 +484,9 @@ To decide whether the map is drawn:
 			[say "eastmost_start is [ eastmost_start ], ";]
 			if shown_map_width > map width begin;
 				[increase center_location_start by 2;]
-				now map_min_x is the minimum of  center_location_start and eastmost_start;
+				now map_min_x is the minimum of center_location_start and eastmost_start;
 				now map_min_x is the maximum of -1 and map_min_x;
-			otherwise;
+			else;
 				[[now map_min_x is center_location_start;]
 				[now map_min_x is shown_map_width;
 				decrease map_min_x by ( map width / 2);]]
@@ -503,8 +503,8 @@ To decide whether the map is drawn:
 		[ Otherwise, place the map so as to center the location, unless that would go over the edge ]
 		[  max (nmost, min (center - WIDTH/2, smost - WIDTH)) ]
 		[if 2 + (room size) * (1 + max_y) >= map height begin;
-			now map_min_y is the maximum of -2 and (the minimum of (2 + (1 + the map_y of location) * (room size) - map height / 2) and (1 + max_y) * room size - map height); 
-		otherwise;
+			now map_min_y is the maximum of -2 and (the minimum of (2 + (1 + the map_y of location) * (room size) - map height / 2) and (1 + max_y) * room size - map height);
+		else;
 			now map_min_y is (room size * (1 + max_y) - map height) / 2;
 		end if;]
 		if 1 is 1 begin; [ limiting the scope of the local variables ]
@@ -523,7 +523,7 @@ To decide whether the map is drawn:
 				now map_min_y is the minimum of center_location_start and southmost_start;
 				[decrease map_min_y by (map height minus 1) / 2;]
 				now map_min_y is the maximum of -1 and map_min_y;
-			otherwise;
+			else;
 				now map_min_y is shown_map_height - map height;
 				decrease map_min_y by 2;
 				now map_min_y is map_min_y / 2;
@@ -549,24 +549,24 @@ To decide whether the map is drawn:
 					if loop_room has an exit to southwest begin;
 						place sw exit + offset of loop_room at temp_x and temp_y + 2;
 						[draw a path from temp_x and temp_y + 2 to -1 and 1 for (the distance from loop_room to the southwest) with ne sw path;]
-						draw a path from temp_x and temp_y + 2 to southwest for the distance southwest from loop_room with ne sw path;				
-					otherwise;
+						draw a path from temp_x and temp_y + 2 to southwest for the distance southwest from loop_room with ne sw path;
+					else;
 						place sw corner + offset of loop_room at temp_x and temp_y + 2;
 					end if;
 					[check 76;]
 					now map drawn direction is northwest;
 					if loop_room has an exit to northwest begin;
 						place nw exit + offset of loop_room at temp_x and temp_y;
-						draw a path from temp_x and temp_y to northwest for the distance northwest from loop_room with nw se path;				
-					otherwise;
+						draw a path from temp_x and temp_y to northwest for the distance northwest from loop_room with nw se path;
+					else;
 						place nw corner + offset of loop_room at temp_x and temp_y;
 					end if;
 					[check 76;]
 					now map drawn direction is northeast;
 					if loop_room has an exit to northeast begin;
 						place ne exit + offset of loop_room at temp_x + 2 and temp_y;
-						draw a path from temp_x + 2 and temp_y to northeast for the distance northeast from loop_room with ne sw path;				
-					otherwise;
+						draw a path from temp_x + 2 and temp_y to northeast for the distance northeast from loop_room with ne sw path;
+					else;
 						place ne corner + offset of loop_room at temp_x + 2 and temp_y;
 					end if;
 					[check 76;]
@@ -574,82 +574,82 @@ To decide whether the map is drawn:
 					if loop_room has an exit to southeast begin;
 						place se exit + offset of loop_room at temp_x + 2 and temp_y + 2;
 						draw a path from temp_x + 2 and temp_y + 2 to southeast for the distance southeast from loop_room with nw se path;
-					otherwise;
+					else;
 						place se corner + offset of loop_room at temp_x + 2 and temp_y + 2;
 					end if;
 					[check 76;]
-					now map drawn direction is south;					
+					now map drawn direction is south;
 					if loop_room has an exit to south begin;
 						place south exit + offset of loop_room at temp_x + 1 and temp_y + 2;
-						draw a path from temp_x + 1 and temp_y + 2 to south for the distance south from loop_room with north south path;				
-					otherwise;
+						draw a path from temp_x + 1 and temp_y + 2 to south for the distance south from loop_room with north south path;
+					else;
 						place south wall + offset of loop_room at temp_x + 1 and temp_y + 2;
 					end if;
 					[check 76;]
 					now map drawn direction is north;
 					if loop_room has an exit to north begin;
 						place north exit + offset of loop_room at temp_x + 1 and temp_y;
-						draw a path from temp_x + 1 and temp_y to north for the distance north from loop_room with north south path;				
-					otherwise;
+						draw a path from temp_x + 1 and temp_y to north for the distance north from loop_room with north south path;
+					else;
 						place north wall + offset of loop_room at temp_x + 1 and temp_y;
 					end if;
 					[check 76;]
 					now map drawn direction is west;
 					if loop_room has an exit to west begin;
 						place west exit + offset of loop_room at temp_x and temp_y + 1;
-						draw a path from temp_x and temp_y + 1 to west for the distance west from loop_room with east west path;				
-					otherwise;
+						draw a path from temp_x and temp_y + 1 to west for the distance west from loop_room with east west path;
+					else;
 						place west wall + offset of loop_room at temp_x and temp_y + 1;
 					end if;
 					[check 76;]
 					now map drawn direction is east;
 					if loop_room has an exit to east begin;
 						place east exit + offset of loop_room at temp_x + 2 and temp_y + 1;
-						draw a path from temp_x + 2 and temp_y + 1 to east for the distance east from loop_room with east west path;				
-					otherwise;
+						draw a path from temp_x + 2 and temp_y + 1 to east for the distance east from loop_room with east west path;
+					else;
 						place east wall + offset of loop_room at temp_x + 2 and temp_y + 1;
 					end if;
 					[check 76;]
 					[now map drawn direction is nothing;]
 					[ Now, draw the central square of the room and, if needed, and up / down / questionmark arrow within ]
-					place 37 + offset of loop_room at temp_x + 1 and temp_y + 1; 
+					place 37 + offset of loop_room at temp_x + 1 and temp_y + 1;
 					now offset is 0;
 					if loop_room is location, now offset is 31; [ changes up arrow to full up arrow and the like ]
 					if loop_room has an exit to up and loop_room has an exit to down begin;
 						place up down arrow + offset of loop_room at temp_x + 1 and temp_y + 1;
-					otherwise if loop_room has an exit to up;
+					else if loop_room has an exit to up;
 						place up arrow + offset of loop_room at temp_x + 1 and temp_y + 1;
-					otherwise if loop_room has an exit to down;
+					else if loop_room has an exit to down;
 						place down arrow + offset of loop_room at temp_x + 1 and temp_y + 1;
-					[otherwise if loop_room has an exit to inside or loop_room has an exit to outside;
+					[else if loop_room has an exit to inside or loop_room has an exit to outside;
 						if loop_room is location begin;
 							place full question arrow at temp_x + 1 and temp_y + 1;
-						otherwise;
+						else;
 							place question arrow at temp_x + 1 and temp_y + 1;
 						end if;]
-					otherwise if loop_room has an exit to inside or loop_room has an exit to outside;
+					else if loop_room has an exit to inside or loop_room has an exit to outside;
 						let ch be automap in;
 						if loop_room is location begin;
 							if loop_room has an exit to inside and loop_room has an exit to outside begin;
 								now ch is automap present inout;
-							otherwise if loop_room has an exit to inside;
+							else if loop_room has an exit to inside;
 								now ch is automap present in;
-							otherwise;
+							else;
 								now ch is automap present out;
 							end if;
-						otherwise;
+						else;
 							if loop_room has an exit to inside and loop_room has an exit to outside begin;
 								now ch is automap inout;
-							otherwise if loop_room has an exit to inside;
+							else if loop_room has an exit to inside;
 								now ch is automap in;
-							otherwise;
+							else;
 								now ch is automap out;
 							end if;
 						end if;
 						place ch of loop_room at temp_x + 1 and temp_y + 1;
 					end if;
 					[check 76;]
-				otherwise; [ in zoomed out mode ]
+				else; [ in zoomed out mode ]
 					if loop_room has an exit to southwest, draw a path from temp_x and temp_y to southwest for the distance southwest from loop_room with ne sw path;
 					if loop_room has an exit to northwest, draw a path from temp_x and temp_y to northwest for the distance northwest from loop_room with nw se path;
 					if loop_room has an exit to southeast, draw a path from temp_x and temp_y to southeast for the distance southeast from loop_room with nw se path;
@@ -662,38 +662,38 @@ To decide whether the map is drawn:
 					if loop_room is location, now offset is 31;
 					if loop_room has an exit to up and loop_room has an exit to down begin;
 						place up down arrow + offset of loop_room at temp_x and temp_y;
-					otherwise if loop_room has an exit to up;
+					else if loop_room has an exit to up;
 						place up arrow + offset of loop_room at temp_x and temp_y;
-					otherwise if loop_room has an exit to down;
+					else if loop_room has an exit to down;
 						place down arrow + offset of loop_room at temp_x and temp_y;
-					otherwise if loop_room has an exit to inside or loop_room has an exit to outside;
+					else if loop_room has an exit to inside or loop_room has an exit to outside;
 						[if loop_room is location begin;
 							place full question arrow at temp_x and temp_y;
-						otherwise;
+						else;
 							place question arrow at temp_x and temp_y;
 						end if;]
 						let ch be automap in;
 						if loop_room is location begin;
 							if loop_room has an exit to inside and loop_room has an exit to outside begin;
 								now ch is automap present inout;
-							otherwise if loop_room has an exit to inside;
+							else if loop_room has an exit to inside;
 								now ch is automap present in;
-							otherwise;
+							else;
 								now ch is automap present out;
 							end if;
-						otherwise;
+						else;
 							if loop_room has an exit to inside and loop_room has an exit to outside begin;
 								now ch is automap inout;
-							otherwise if loop_room has an exit to inside;
+							else if loop_room has an exit to inside;
 								now ch is automap in;
-							otherwise;
+							else;
 								now ch is automap out;
 							end if;
 						end if;
 						place ch of loop_room at temp_x and temp_y;
-					otherwise if loop_room is location;
+					else if loop_room is location;
 						place full room of loop_room at temp_x and temp_y;
-					otherwise;
+					else;
 						place empty room of loop_room at temp_x and temp_y;
 					end if;
 				end if;
@@ -706,33 +706,37 @@ To decide whether the map is drawn:
 		decide yes;
 	end if;
 	[stop capturing text;]
-	decide no.					
-	
+	decide no.
+
 Section 4 - Displaying the map
-	
+
 [ Adapted from Emily Short's Basic Screen Effects ]
 To fill status bar with (selected table - a table-name) and map:
         let __n be the number of rows in the selected table;
 	if the current zoom is map absent begin;
 	        deepen status line to __n rows;
-	otherwise;
+	else;
 	        deepen status line to __n + map height rows;
 	end if;
 	let __index be 1;
         repeat through selected table
         begin;
-                move cursor to __index; 
+                move cursor to __index;
                 say "[left entry]";
                 center central entry at row __index;
                 right align cursor to __index;
                 say "[right entry]";
-                change __index to __index + 1;
+                now __index is __index + 1;
         end repeat;
 	if the map is drawn and the current zoom is not map absent, display the map at line __n;
 	[if __b and the current zoom is not map absent, display the map at line __n + 1;]
-		
-Before constructing the status line (this is the automap add adjacent rooms to map rule) : if not using the automap manual exploration option and the location is a mappable room and the location is not explored, say "Error exploring [location]."
 
+[Before constructing the status line (this is the automap add adjacent rooms to map rule) :
+	if not using the automap manual exploration option:
+		if the location is a mappable room:
+			if the location is not explored:
+				say "Error exploring [location].";
+]
 Rule for constructing the status line (this is the automap standard status line rule):
 	fill status bar with table of ordinary status and map.
 
@@ -748,7 +752,7 @@ Array Automap_Unicode_Conv -->
       0 $2500 $2502 63 63 63 63 63 63 63 63 11 12 13 14 15 ! 0 -  15
      16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 ! 16 -  31
      32 $2190 $2192 47 92 32 $2500 $2500 $2502 $2502 $2534 $252c $251c $2524 $2301 $2308 ! 32 -  47
-!     32 $2190 $2192 $2571 $2572 32 $2500 $2500 $2502 $2502 $2534 $252c $251c $2524 $2301 $2308 ! 32 -  47
+!   32 $2190 $2192 $2571 $2572 32 $2500 $2500 $2502 $2502 $2534 $252c $251c $2524 $2301 $2308 ! 32 -  47
      $2309 $230b $2534 $252c $251c $2524 $2588 $2580 $2584 $258c $2590 $2584 $2580 $258c $2590 $259d ! 48 -  63
      $2597 $2596 $2598 $259d $2597 $2596 $2598 43 43 43 43 $2594 95 $23b9 $2595 32 ! 64 -  79
      $258f $258e $258d $258c $258b $258a $2589 $2588 $2595 $258f $2573 $253c $2191 $2193 $2195 $25a2 ! 80 -  95
@@ -779,7 +783,7 @@ Array Automap_Font_3_Conv -> 0 38 40 96 96 96 126 126 126 96 126 11 12 13 14 15 
 
 [ I6_Draw_Map_At line_n width posa posb ctr ch graphic_mode transform_table hyperlink_room;
 	++ line_n;
-	posa = line_n + 1;	
+	posa = line_n + 1;
 	width = VM_ScreenWidth();
 	graphic_mode = 0;
 
@@ -794,7 +798,7 @@ Array Automap_Font_3_Conv -> 0 38 40 96 96 96 126 126 126 96 126 11 12 13 14 15 
 	if ( (+ current displayness +) == (+ map display unicode +) ) {
 		#ifdef TARGET_ZCODE;
 			graphic_mode = -1;
-		#ifnot;		
+		#ifnot;
 			if (unicode_gestalt_ok) {
 				graphic_mode = -1;
 			} else {
@@ -811,7 +815,7 @@ Array Automap_Font_3_Conv -> 0 38 40 96 96 96 126 126 126 96 126 11 12 13 14 15 
 		transform_table = Automap_Unicode_Conv;
 		#ifdef AUTOMAP_VISIBLE_BACKGROUND;
 			transform_table-->32 = 71;
-		#endif;		
+		#endif;
 	} else {
 		transform_table = Automap_Font_3_Conv;
 		#ifdef AUTOMAP_VISIBLE_BACKGROUND;
@@ -827,7 +831,7 @@ Array Automap_Font_3_Conv -> 0 38 40 96 96 96 126 126 126 96 126 11 12 13 14 15 
 	ctr = 0;
 	for (posa = line_n: posa < MAP_HEIGHT + line_n: ++ posa) {
 		posb = (width - MAP_WIDTH - 1) / 2;
-		VM_MoveCursorInStatusLine (posa, posb);;
+		VM_MoveCursorInStatusLine (posa, posb);
 
 		for (posb = 0: posb < MAP_WIDTH: ++ posb) {
 			#ifdef AUTOMAP_HYPERLINKS;
@@ -845,12 +849,12 @@ Array Automap_Font_3_Conv -> 0 38 40 96 96 96 126 126 126 96 126 11 12 13 14 15 
 				#ifnot;
 					glk_put_char_uni (transform_table-->(Automap_Chars->( ctr ++ )));
 				#endif;
-			} else 
+			} else
 				print (char) transform_table->(Automap_Chars->( ctr ++ ));
 
 			if (hyperlink_room ~= 0) {
 				! TODO copy-pasted from Basic Hyperlinks - Is there a way to call instead?
-				if (glk_gestalt(gestalt_Hyperlinks, 0)) glk_set_hyperlink(0); 
+				if (glk_gestalt(gestalt_Hyperlinks, 0)) glk_set_hyperlink(0);
 				!end room link;
 			}
 			! say "[end xlink]"; ;
@@ -864,7 +868,7 @@ Array Automap_Font_3_Conv -> 0 38 40 96 96 96 126 126 126 96 126 11 12 13 14 15 
 					#endif;
 				} else
 					print (char) transform_table->(Automap_Chars->( ctr ++ ));
-			#endif;						
+			#endif;
 		}
 	}
 	#ifdef TARGET_ZCODE;
@@ -882,18 +886,18 @@ Array Automap_Font_3_Conv -> 0 38 40 96 96 96 126 126 126 96 126 11 12 13 14 15 
 -);
 
 
-The automap size is a number that varies. The automap size is usually 9. When play begins: if automap size is at least 1, reserve automap memory of automap size rows.
+The automap size is a number that varies.[@Tag:NotSaved] The automap size is usually 9. When play begins: if automap size is at least 1, reserve automap memory of automap size rows.
 
 To say (n - a number) blank lines:
 	while n > 0:
-		say "[line break]";
+		LineBreak;
 		decrease n by 1.
 
 Section 5 - Hyperlink specific stuff (for use with Basic Hyperlinks by Emily Short)
 
 [To set linked room to (x - a number):
-	say "[set link x]".
-	
+	say "[set link x]";
+
 To end linked room:
 	say "[end link]".]
 
@@ -902,7 +906,7 @@ Hyperlink moving to room is an action applying to one thing.
 
 Check hyperlink moving to room:
 	if the noun is the location, say "You're already in [the location]." instead.
-	
+
 Carry out hyperlink moving to room:
 	while the player is not in the noun:
 		let heading be the best route from the location to the noun through visited rooms, using even locked doors;
@@ -914,7 +918,7 @@ Carry out hyperlink moving to room:
 
 To decide what room is the glulx equivalent of (n - a number):
 	(- {n} -)
-	
+
 To decide whether (n - a number) codes a glulx object:
 	(- (metaclass({n}) == Object) -)
 
@@ -923,15 +927,15 @@ Section 99 - Debug verbs - Not for release
 [To check hyperlink availability:
 	(- if (glk_gestalt(gestalt_Hyperlinks, 0))
 		print "Hyperlinks supported!^";
-	else 
+	else
 		print "Hyperlinks not supported!^";
 	-).
 
 When play begins:
 	if using the automap hyperlinks option,
 		Check hyperlink availability.
-]	
-Map viewing is an action out of world applying to nothing.  Understand "map view" as map viewing.
+]
+Map viewing is an action out of world applying to nothing. Understand "map view" as map viewing.
 
 Carry out map viewing:
 	say "Viewing rooms coregional with [location].";
@@ -943,8 +947,8 @@ Carry out map viewing:
 		say "[viewed room] [if viewed room is not currently_mapped](currently unmapped) [end if]is at [map_x of viewed room], [map_y of viewed room].";
 	end repeat;
 
-Map dumping is an action out of world applying to nothing.  Understand "map dump" as map dumping.
-Map link dumping is an action out of world applying to nothing.  Understand "map link dump" as map link dumping.
+Map dumping is an action out of world applying to nothing. Understand "map dump" as map dumping.
+Map link dumping is an action out of world applying to nothing. Understand "map link dump" as map link dumping.
 
 Include (-
 [ Automap_dump i;
@@ -960,7 +964,7 @@ Include (-
 			glk_set_hyperlink(j);
 		print j, " ";
 		if (j ~= 0 && glk_gestalt(gestalt_Hyperlinks, 0))
-			glk_set_hyperlink(0); 
+			glk_set_hyperlink(0);
 	}
 #endif;
 ];
@@ -974,40 +978,40 @@ To say automap link dump:
 	(- Automap_link_dump(); -).
 
 Carry out map dumping:
-	say "MAP DUMP:[line break][automap dump].".
-	
+	say "MAP DUMP:[line break][automap dump].";
+
 Carry out map link dumping:
-	say "MAP LINK DUMP:[line break][automap link dump].".
-	
+	say "MAP LINK DUMP:[line break][automap link dump].";
+
 Automap ends here.
 
 ---- DOCUMENTATION ----
 
 Automap will watch what rooms the player has visited and create a Beyond Zork style automap.
 
-Kinds:  Mappable Room.  All rooms which are to show on the map must be of this kind.
+Kinds: Mappable Room. All rooms which are to show on the map must be of this kind.
 
-By default, rooms will be placed one unit away in the appropriate direction.  If the path should be longer, you can manually set the distance.
+By default, rooms will be placed one unit away in the appropriate direction. If the path should be longer, you can manually set the distance.
 
 It is the responsibility of the author to make the map has a consistent geography and that no two rooms overlap.
 
 Activities:
 
-- The "Automap work" is activity is being handled while the program is attempting to explore a room or draw the map (that is, the times when it might perform the "which room is (direction) from (room)" decision).  It is provided if you need to have anything work differently during such a test.
+- The "Automap work" is activity is being handled while the program is attempting to explore a room or draw the map (that is, the times when it might perform the "which room is (direction) from (room)" decision). It is provided if you need to have anything work differently during such a test.
 
 Use options:
 
-- Use automap manual display:  The program will not display the map to the status line on its own.
+- Use automap manual display: The program will not display the map to the status line on its own.
 
-- Use automap manual exploration:  The program will not add rooms to the map unless you explicitly run the "(room) is explored" decision.
+- Use automap manual exploration: The program will not add rooms to the map unless you explicitly run the "(room) is explored" decision.
 
-- Use automap hide paths through closed doors:  The program will not add paths that go through closed doors.
+- Use automap hide paths through closed doors: The program will not add paths that go through closed doors.
 
-- Use automap static allocation:  Causes a glulx game to allocate memory for the automap at compile time.  Reduces flexibility, but allows the game to run on more interpreters.  (Automatically set when compiling to zcode.)
+- Use automap static allocation: Causes a glulx game to allocate memory for the automap at compile time. Reduces flexibility, but allows the game to run on more interpreters. (Automatically set when compiling to zcode.)
 
-- Use automap reserved area of at least N:  Sets the amount of memory the game will use for drawing the map.  Must be at least (map rows)*(map columns).  This option is ignored when compiling to glulx, unless the "use static allocation" option is set.
+- Use automap reserved area of at least N: Sets the amount of memory the game will use for drawing the map. Must be at least (map rows)*(map columns). This option is ignored when compiling to glulx, unless the "use static allocation" option is set.
 
-- Use automap visible background:  Spaces that would ordinarily be blank will be shown as periods.  Meant for experimenting with the size of the map while testing and is not meant for release.
+- Use automap visible background: Spaces that would ordinarily be blank will be shown as periods. Meant for experimenting with the size of the map while testing and is not meant for release.
 
 
 New source code syntax:
@@ -1015,26 +1019,26 @@ New source code syntax:
 	decision: "(mappable room) is placed (number) and (number) from (mappable room)":
 If the player has visited both rooms, it will attempt to arrange the map so that they will appear in the given relative positions.
 Returns yes unless doing so creates an inconsistency.
-It will not be necessary to use this decision in your own code unless you want to have rooms that would not ordinarily be on the same map region together.  (For example, if a closet is connected to the main room by in / out, this would put it on the map with the rest of the rooms.)
+It will not be necessary to use this decision in your own code unless you want to have rooms that would not ordinarily be on the same map region together. (For example, if a closet is connected to the main room by in / out, this would put it on the map with the rest of the rooms.)
 
 	decision: "(room) is explored":
-Attempts to connect (room) with any adjacent rooms.  It probably will not be necessary to use this unless you want to add rooms the player hasn't visited, or you are using the manual exploration option.
+Attempts to connect (room) with any adjacent rooms. It probably will not be necessary to use this unless you want to add rooms the player hasn't visited, or you are using the manual exploration option.
 Returns no if doing so creates any inconsistencies, and yes otherwise.
 
 	phrase: "explore (room)" / "remap (room)":
-Attempt to add the room to the automap.  Prints an error if there are any problems.  Again, it probably will not be necessary to use this unless you want to add rooms the player hasn't visited, or you are using the manual exploration option.
+Attempt to add the room to the automap. Prints an error if there are any problems. Again, it probably will not be necessary to use this unless you want to add rooms the player hasn't visited, or you are using the manual exploration option.
 
 	phrase: "unmap (mappable room)":
-Removes the room from the automap.  Will be needed if you want to change its position relative to other rooms.
+Removes the room from the automap. Will be needed if you want to change its position relative to other rooms.
 
 	phrase: "fill status bar with (selected table - a table-name) and map":
-Will print the calculated automap.  Should only be necessary if you are using the manual display option.
+Will print the calculated automap. Should only be necessary if you are using the manual display option.
 
 	phrase: "reserve automap memory of (number) rows by (number) cols":
-Sets the size of the displayed map.  Must be called for any map to display.  May be changed at any time.  (Maps will center better if the height and width are 1 more than a multiple of 4: 1, 5, 9, 13, 17, ...)
+Sets the size of the displayed map. Must be called for any map to display. May be changed at any time. (Maps will center better if the height and width are 1 more than a multiple of 4: 1, 5, 9, 13, 17, ...)
 
 	phrase: "reserve automap memory of (number) rows":
-Sets the size of displayed map.  Width is the current width of the status line.  If using static allocation, and this would require more memory than is allocated, width is trimmed to what will fit.  (Maps will center better if the height and width are 1 more than a multiple of 4: 1, 5, 9, 13, 17, ...)
+Sets the size of displayed map. Width is the current width of the status line. If using static allocation, and this would require more memory than is allocated, width is trimmed to what will fit. (Maps will center better if the height and width are 1 more than a multiple of 4: 1, 5, 9, 13, 17, ...)
 
 
 New in-game commands:
@@ -1043,18 +1047,18 @@ New in-game commands:
 
 - "zoom out": Shows the map so that rooms have 1x1 grids. (the default)
 
-- "zoom away": Removes the map entirely. 
+- "zoom away": Removes the map entirely.
 
 - "zoom": Rotates through the various zoom modes.
 
 To set the zoom manually, change the current zoom variable to map zoomed in, map zoomed out, or map absent.
 
 
-- "map automatic": Try to use the font 3 characters.  If the interpreter does not support them, convert down to ASCII characters.
+- "map automatic": Try to use the font 3 characters. If the interpreter does not support them, convert down to ASCII characters.
 
 - "map fancy": Force using the font 3 characters, whether the interpreter supports them or not.
 
-- "map plain": Convert down to ASCII characters.  Don't even try to use font 3. (the default)
+- "map plain": Convert down to ASCII characters. Don't even try to use font 3. (the default)
 
 If the game is run on a buggy interpreter, using the command "gargoyle bug workaround" should prevent problems.
 
@@ -1063,7 +1067,7 @@ If the game is run on a buggy interpreter, using the command "gargoyle bug worka
 
 Thanks to Jesse McGrew and Mike Talbert for help with overriding decisions.
 Thanks to Cristoph Ender and Andrew Plotkin for help with Unicode.
-Thanks to Andrew Plotkin and Jesse McGrew for help with joining I6 and I7. 
+Thanks to Andrew Plotkin and Jesse McGrew for help with joining I6 and I7.
 Thanks to S. John Ross for testing and feedback.
 Thanks to Aaron Reed for feedback and a minimal example.
 Lots and lots of thanks to Peter Pears for heavy testing and feedback.
@@ -1074,8 +1078,8 @@ Example: * "The Test" by Aaron Reed - A minimal test.
 
 	Include Automap by Mark Tilford.
 
-	Stage is west of Wings and north of Dressing Room. Booth is northwest of Wings. Closet is east of Wings.  It is unmappable.
- 
+	Stage is west of Wings and north of Dressing Room. Booth is northwest of Wings. Closet is east of Wings. It is unmappable.
+
 Example: ** The Demonstration - A simple demonstration.
 
 	*: "The demonstration" by Mark Tilford.
@@ -1086,45 +1090,45 @@ Example: ** The Demonstration - A simple demonstration.
 	Include Basic Hyperlinks by Emily Short;
 	Use automap hyperlinks;
 
-	When play begins:  now current zoom is map zoomed in.
-	
+	When play begins: now current zoom is map zoomed in.
+
 	[The western hall is a mappable room.
-	The eastern hall is a mappable room.  It is east of western hall.
-	The southern hall is a mappable room.  It is southeast of western hall.  It is southwest of eastern hall.]
+	The eastern hall is a mappable room. It is east of western hall.
+	The southern hall is a mappable room. It is southeast of western hall. It is southwest of eastern hall.]
 	The heavy door is south of the western hall and north of the office. It is a door.
 	[The office is a mappable room.]
-	The southern hall is southeast of western hall and southwest of eastern hall.  The eastern hall is east of western hall.
-	The heavy door is a door.  It is south of the western hall and north of the office.
-	
-	Fooing is an action applying to nothing.  Understand "foo" as fooing.
+	The southern hall is southeast of western hall and southwest of eastern hall. The eastern hall is east of western hall.
+	The heavy door is a door. It is south of the western hall and north of the office.
+
+	Fooing is an action applying to nothing. Understand "foo" as fooing.
 
 	Before fooing when the player is in eastern hall or the player is in western hall:
-		say "To make a longer path, the distance must be declared both ways."
+		say "To make a longer path, the distance must be declared both ways.";
 	To decide what number is the distance (d - east) from (r - western hall): decide on 2.
 	To decide what number is the distance (d - west) from (r - eastern hall): decide on 2.
 
-	[The western balcony is a mappable room.  It is up from western hall.
-	The central balcony is a mappable room.  It is east from western balcony.
-	The eastern balcony is a mappable room.  It is east from central balcony.  It is up from eastern hall.]
+	[The western balcony is a mappable room. It is up from western hall.
+	The central balcony is a mappable room. It is east from western balcony.
+	The eastern balcony is a mappable room. It is east from central balcony. It is up from eastern hall.]
 	The western balcony is up from western hall and west from central balcony.
 	The eastern balcony is east from central balcony and up from eastern hall.
 
-	Outside Building is a mappable room.  It is west from western balcony.        
+	Outside Building is a mappable room. It is west from western balcony.
 
 	Before fooing when the player is in western balcony or the player is in eastern balcony:
-		say "By default, rooms connected with up / down / in / out are not placed on the same map.  If you want to put them on the same map, you can position them manually." 
-		
+		say "By default, rooms connected with up / down / in / out are not placed on the same map. If you want to put them on the same map, you can position them manually.";
+
 	Before constructing the status line:
 		unless western balcony is placed 0 and -1 from western hall, say "*** Error placing west balcony ***";
 		unless eastern balcony is placed 0 and -1 from eastern hall, say "*** Error placing east balcony ***";
 		unless upstairs closet is placed -1 and 0 from upstairs office, say "*** Error placing upstairs closet ***".
-		
-	[Upstairs office is a mappable room.  It is north of western balcony.
-	Upstairs closet is a mappable room.  It is inside from upstairs office.]
+
+	[Upstairs office is a mappable room. It is north of western balcony.
+	Upstairs closet is a mappable room. It is inside from upstairs office.]
 	Upstairs office is north of western balcony.
 	Upstairs closet is inside from upstairs office.
 
-	Stupid room is a mappable room.  It is east from upstairs office.
+	Stupid room is a mappable room. It is east from upstairs office.
 
 	Alpha room is east of stupid room.
 	Beta room is north of alpha room and northeast of stupid room.
@@ -1139,11 +1143,11 @@ Example: ** The Demonstration - A simple demonstration.
 
 
 	Before fooing in elevator:
-		say "If you want to move a room on the map, you'll have to unmap it first."
-		
-	The elevator is a mappable room.  The elevator can be high or low.  It is low.
+		say "If you want to move a room on the map, you'll have to unmap it first.";
+
+	The elevator is a mappable room. The elevator can be high or low. It is low.
 	The elevator is east of eastern hall.
-	The button is in the elevator.  It is fixed in place.
+	The button is in the elevator. It is fixed in place.
 	Instead of pushing the button:
 		say "The doors shut; the elevator shakes briefly, then the doors open again.";
 		unmap the elevator;
@@ -1152,17 +1156,17 @@ Example: ** The Demonstration - A simple demonstration.
 			change the east exit of eastern hall to nothing;
 			change the east exit of eastern balcony to elevator;
 			change the west exit of elevator to eastern balcony;
-		otherwise;
+		else;
 			now the elevator is low;
 			change the east exit of eastern hall to elevator;
 			change the east exit of eastern balcony to nothing;
 			change the west exit of elevator to eastern hall;
 		end if.
-			
-	before fooing when the player is in western balcony or the player is in outside building:
-		say "If you want to split rooms into separate map regions despite them being reachable from each other by compass points, you can override the decision so that it has a different value while working with the automap than when making ordinary movement."
 
-	Phony Room is an unmappable room.  It is west of office and southwest of western hall.
+	before fooing when the player is in western balcony or the player is in outside building:
+		say "If you want to split rooms into separate map regions despite them being reachable from each other by compass points, you can override the decision so that it has a different value while working with the automap than when making ordinary movement.";
+
+	Phony Room is an unmappable room. It is west of office and southwest of western hall.
 
 	To decide what room is the room (dir - west) from (room - western balcony):
 		if handling the automap work activity, decide on Phony Room.
@@ -1170,51 +1174,51 @@ Example: ** The Demonstration - A simple demonstration.
 	To decide what room is the room (dir - east) from (room - outside building):
 		if handling the automap work activity, decide on Phony Room.
 
-	To decide what number is the distance (dir - west) from (room - western balcony): decide on 3.	
-	
+	To decide what number is the distance (dir - west) from (room - western balcony): decide on 3.
+
 	before fooing when the player is in western balcony or the player is in eastern balcony:
-		say "(Current versions of Inform do not go through the decision mechanism when responding to the player's compass movements, so the 'if handling the automap work activity' check may not be necessary.  Something like 'decide on nothing / nowhere' end should theoretically allow hiding a passage completely, but all I got were syntax errors.)[line break]"
+		say "(Current versions of Inform do not go through the decision mechanism when responding to the player's compass movements, so the 'if handling the automap work activity' check may not be necessary. Something like 'decide on nothing / nowhere' end should theoretically allow hiding a passage completely, but all I got were syntax errors.)[line break]";
 
 	before fooing the first time:
-		say "You must set the displayed size of the map before it is displayed.  This can be changed at any time not during automap work.[line break]
+		say "You must set the displayed size of the map before it is displayed. This can be changed at any time not during automap work.[line break]
 			To fix the size at the start, use something like 'When play begins: Reserve automap memory of 13 rows by 17 cols;'.[line break]
 			Omitting the columns will have it allocate memory to fill the width of the screen, but you must readjust each time the status line is rebuilt.[line break]
-			In Glulx games, it will automatically allocate memory as needed.  In Zcode games, you must reserve that memory in advance:
-			Use automap reserved area of at least 400.  (It's okay to put such a line in a Glulx game; it will be ignored.)[line break]
+			In Glulx games, it will automatically allocate memory as needed. In Zcode games, you must reserve that memory in advance:
+			Use automap reserved area of at least 400. (It's okay to put such a line in a Glulx game; it will be ignored.)[line break]
 			In ZCode mode, you must print at least as many blank lines as your map is high so that the text will start out below the automap.[line break]
 			Map sizes are in characters; a room is 1 character square in zoomed out mode, 3 characters square in zoomed in mode."
 
 	Section 99Z (for Z-machine only)
-	
+
 		When play begins: say "[map height blank lines]"
-	
+
 	Section 1
 
 	before fooing the first time: say "If you want something other than the usual line above your map, you'll need to build the status line yourself.[line break]"
-	
+
 	The first for constructing the status line rule:
 		reserve automap memory of 13 rows;
 		fill status bar with table of mostly ordinary status and map.
 
 	Table of Mostly Ordinary Status
 	left	central	right
-	"[location]"	""	"[score]/[turn count]" 
+	"[location]"	""	"[score]/[turn count]"
 	"---"	"---"	"---"
-	
+
 	Section 98 (for use with Basic Hyperlinks by Emily Short)
 
-	Current autowalk destination is a room that varies.  Autowalk destination set is a truth state that varies.
-	
-	autowalking is an action applying to one topic.  Understand "autowalk to [text]" as autowalking.
-			
+	Current autowalk destination is a room that varies.[@Tag:NotSaved] Autowalk destination set is a truth state that varies.[@Tag:NotSaved]
+
+	autowalking is an action applying to one topic. Understand "autowalk to [text]" as autowalking.
+
 	Carry out autowalking:
 		if autowalk destination set is true begin;
 			now autowalk destination set is false;
 			try hyperlink moving to room current autowalk destination;
-		otherwise;
+		else;
 			say "(Autowalk is meant to be generated by hyperlinks, not typed directly.)";
 		end if.
-	
+
 	The first clicking hyperlink rule:
 		[say "Clicked on link [current link number].";]
 		if current link number codes a glulx object begin;
@@ -1224,5 +1228,3 @@ Example: ** The Demonstration - A simple demonstration.
 			now glulx replacement command is "autowalk to [current autowalk destination]";
 			rule succeeds;
 		end if;
-			
-			

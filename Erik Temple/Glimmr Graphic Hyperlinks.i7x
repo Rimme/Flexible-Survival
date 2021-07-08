@@ -24,7 +24,7 @@ To say GGH:
 
 
 Part 2 - Basic Input
-	
+
 A g-window can be g-graphlinked. A g-window is usually not g-graphlinked.
 
 A graphlink g-window is a kind of graphics g-window. A graphlink g-window is g-graphlinked.
@@ -44,25 +44,25 @@ To cancel input in main window:
 
 To decide which number is the clicked window reference:
 	(- (gg_event-->1) -)
-	
+
 The first glulx mouse input rule (this is the identify window rule):
 	now glulx replacement command is "";
 	Repeat with item running through g-graphlinked g-windows:
 		if the ref-number of item is the clicked window reference:
 			now the current graphlink window is item.
-			
+
 A glulx mouse input rule (this is the default graphlink setting rule):
 	perform glulx graphlink request in current graphlink window.
-	
+
 To perform glulx graphlink request in (g - a graphics g-window):
 	(-  if (glk_gestalt(gestalt_MouseInput, winType_Graphics)) DoGraphLink({g}); -)
-	
+
 Include (-
 
 [ DoGraphLink g;
-	SetGraphLink(g); 
+	SetGraphLink(g);
 	PlayGraphlink(gg_event-->2, gg_event-->3);
- ]; 
+ ];
 
 [ PlayGraphlink x y;
 	(+ current graphlink x +) = x;
@@ -91,12 +91,12 @@ Include (-
 
 Part 3 - Clicking Graphlink Rules
 
-Current graphlink x is a number that varies.
-Current graphlink y is a number that varies.
-Current graphlink window is a g-window that varies.
-Current graphlink row is a number that varies. [We can refer to this number from within the graphlink processing rules, ensuring that we operate on the same row that was selected in the clicking graphlink rules.]
+Current graphlink x is a number that varies.[@Tag:NotSaved]
+Current graphlink y is a number that varies.[@Tag:NotSaved]
+Current graphlink window is a g-window that varies.[@Tag:NotSaved]
+Current graphlink row is a number that varies.[@Tag:NotSaved] [We can refer to this number from within the graphlink processing rules, ensuring that we operate on the same row that was selected in the clicking graphlink rules.]
 
-Candidate replacement command is indexed text that varies. [The candidate replacement command is set in the clicking graphlink rules. If the default graphlink processing rule is fired, this will be converted into the glulx replacement command, to be processed by Glulx Entry Points. We use a "candidate" because if we actually set the replacement command, Glulx Entry Points will automatically paste the command. So we need to save the information in a variable, but only act on it if we hit the default rule.]
+Candidate replacement command is indexed text that varies.[@Tag:NotSaved] [The candidate replacement command is set in the clicking graphlink rules. If the default graphlink processing rule is fired, this will be converted into the glulx replacement command, to be processed by Glulx Entry Points. We use a "candidate" because if we actually set the replacement command, Glulx Entry Points will automatically paste the command. So we need to save the information in a variable, but only act on it if we hit the default rule.]
 
 The clicking graphlink rules are a rulebook.
 
@@ -108,7 +108,7 @@ To decide whether the click hit a hot link:
 				now the current graphlink row is the chosen-row;
 				if there is a replacement entry:
 					now the candidate replacement command is replacement entry;
-				otherwise:
+				else:
 					now the candidate replacement command is "";
 				decide yes;
 	decide no.
@@ -128,7 +128,7 @@ A clicking graphlink rule (this is the default command replacement by graphlinks
 		#end if;
 		follow the graphlink processing rules;
 		rule succeeds;
-	otherwise:
+	else:
 		#if utilizing Glimmr debugging;
 		say "[>console][GGH]Mouse input received in window [italic type][current graphlink window][roman type] (no link triggered): ([current graphlink x], [current graphlink y]).[<]";
 		#end if;
@@ -141,35 +141,35 @@ Chapter - Debugging niceties (for use without Glimmr Drawing Commands by Erik Te
 
 To #if utilizing Glimmr debugging:
 	(- #ifdef Glimmr_DEBUG; -)
-	
+
 To #end if:
 	(- #endif; -)
 
 To say >console:
 	do nothing.
- 
+
 To say <:
 	do nothing.
 
 
 Part 3b - Clicking Graphlink Rules II (for use with Glimmr Canvas-Based Drawing by Erik Temple)
 
-Current graphlink is an object that varies. [The current graphlink is either text or g-element, depending on whether Glimmr Canvas-Based Drawing is also in use]
+Current graphlink is an object that varies.[@Tag:NotSaved] [The current graphlink is either text or g-element, depending on whether Glimmr Canvas-Based Drawing is also in use]
 
 A clicking graphlink rule (this is the default command replacement by graphlinks rule):
 	if the click hit a hot link:
 		#if utilizing Glimmr debugging;
-		let graph-x be current graphlink x as a fixed point number;
-		let graph-y be current graphlink y as a fixed point number;
-		say "[>console][GGH]Mouse input received on element [i][current graphlink][/i] in window [i][current graphlink window][/i]: ([current graphlink x], [current graphlink y]), approximately equivalent to canvas ([(graph-x real minus the x-offset of the current graphlink window) real divided by the scaling factor of the current graphlink window as an integer], [(graph-y real minus the y-offset of the current graphlink window) real divided by the scaling factor of the current graphlink window as an integer]).[<]";
+		let graph-x be current graphlink x + 0.0;
+		let graph-y be current graphlink y + 0.0;
+		say "[>console][GGH]Mouse input received on element [i][current graphlink][/i] in window [i][current graphlink window][/i]: ([current graphlink x], [current graphlink y]), approximately equivalent to canvas ([(graph-x minus the x-offset of the current graphlink window) divided by the scaling factor of the current graphlink window to the nearest whole number], [(graph-y minus the y-offset of the current graphlink window) divided by the scaling factor of the current graphlink window to the nearest whole number]).[<]";
 		#end if;
 		follow the graphlink processing rules for the current graphlink;
 		rule succeeds;
-	otherwise:
+	else:
 		#if utilizing Glimmr debugging;
-		let graph-x be current graphlink x as a fixed point number;
-		let graph-y be current graphlink y as a fixed point number;
-		say "[>console][GGH]Mouse input received in window [i][current graphlink window][/i] (no link triggered): ([current graphlink x], [current graphlink y]), approximately equivalent to canvas ([(graph-x real minus the x-offset of the current graphlink window) real divided by the scaling factor of the current graphlink window as an integer], [(graph-y real minus the y-offset of the current graphlink window) real divided by the scaling factor of the current graphlink window as an integer]).[<]";
+		let graph-x be current graphlink x + 0.0;
+		let graph-y be current graphlink y + 0.0;
+		say "[>console][GGH]Mouse input received in window [i][current graphlink window][/i] (no link triggered): ([current graphlink x], [current graphlink y]), approximately equivalent to canvas ([(graph-x minus the x-offset of the current graphlink window) divided by the scaling factor of the current graphlink window to the nearest whole number], [(graph-y minus the y-offset of the current graphlink window) divided by the scaling factor of the current graphlink window to the nearest whole number]).[<]";
 		#end if;
 		now glulx replacement command is "".
 
@@ -185,9 +185,9 @@ A graphlink processing rule (this is the default graphlink processing rule):
 		cancel input in main window;
 		now the glulx replacement command is the candidate replacement command;
 		now the candidate replacement command is "";
-		rule succeeds. 
-	
-	
+		rule succeeds.
+
+
 Part 4b - Graphlink processing rules (for use with Glimmr Canvas-Based Drawing by Erik Temple)
 
 The graphlink processing rules are an object-based rulebook.
@@ -197,23 +197,23 @@ A graphlink processing rule for a g-element (called the link) (this is the defau
 		cancel input in main window;
 		now the glulx replacement command is the candidate replacement command;
 		now the candidate replacement command is "";
-		rule succeeds. 
+		rule succeeds.
 
 
 Part 5 - Identifying whether a command was generated by the mouse
 
-The mouse-generated flag is a truth state that varies. The mouse-generated flag is false.
+The mouse-generated flag is a truth state that varies.[@Tag:NotSaved] The mouse-generated flag is false.
 
-A command-pasting rule (this is the flag generated commands rule): 
+A command-pasting rule (this is the flag generated commands rule):
 	now the mouse-generated flag is true;
-	
+
 Before reading a command (this is the mouse-generated flag reset rule):
 	now the mouse-generated flag is false;
 	continue the action.
-	
+
 To decide whether the command is mouse-generated:
 	decide on the mouse-generated flag.
-	
+
 The flag generated commands rule is listed before the glue replacement command into parse buffer rule in the command-pasting rules.
 
 
@@ -228,7 +228,7 @@ To set a graphlink in (g - a g-window) identified as (newlinkid - some text) fro
 		now p-left entry is gleft;
 		now p-right entry is gright;
 		now replacement entry is linkaction;
-	otherwise if the number of blank rows in the Table of Graphlink Glulx Replacement Commands is greater than 0:
+	else if the number of blank rows in the Table of Graphlink Glulx Replacement Commands > 0:
 		choose a blank row in the Table of Graphlink Glulx Replacement Commands;
 		now linkid entry is newlinkid;
 		now g-win entry is g;
@@ -247,7 +247,7 @@ To set a graphlink in (g - a g-window) identified as (newlinkid - some text) fro
 		now p-left entry is gleft;
 		now p-right entry is gright;
 		now alt entry is linkref;
-	otherwise if the number of blank rows in the Table of Graphlink Glulx Replacement Commands is greater than 0:
+	else if the number of blank rows in the Table of Graphlink Glulx Replacement Commands > 0:
 		choose a blank row in the Table of Graphlink Glulx Replacement Commands;
 		now linkid entry is newlinkid;
 		now g-win entry is g;
@@ -266,7 +266,7 @@ To set a graphlink in (g - a g-window) identified as (newlinkid - some text) fro
 		now p-left entry is gleft;
 		now p-right entry is gright;
 		now action entry is linkref;
-	otherwise if the number of blank rows in the Table of Graphlink Glulx Replacement Commands is greater than 0:
+	else if the number of blank rows in the Table of Graphlink Glulx Replacement Commands > 0:
 		choose a blank row in the Table of Graphlink Glulx Replacement Commands;
 		now linkid entry is newlinkid;
 		now g-win entry is g;
@@ -285,7 +285,7 @@ To zero the/-- link-table:
 	repeat through the Table of Graphlink Glulx Replacement Commands:
 		blank out the whole row.
 
-	
+
 Table of Graphlink Glulx Replacement Commands
 linkid	g-win	p-top	p-bottom	p-left	p-right	replacement	alt	action
 some text	a g-window	a number	a number	a number	a number	some text	number	stored action
@@ -303,7 +303,7 @@ To set a graphlink in (g - a g-window) identified as (newlinkid - an object) fro
 		now p-left entry is gleft;
 		now p-right entry is gright;
 		now replacement entry is linkaction;
-	otherwise if the number of blank rows in the Table of Graphlink Glulx Replacement Commands is greater than 0:
+	else if the number of blank rows in the Table of Graphlink Glulx Replacement Commands > 0:
 		choose a blank row in the Table of Graphlink Glulx Replacement Commands;
 		now linkid entry is newlinkid;
 		now g-win entry is g;
@@ -322,7 +322,7 @@ To set a graphlink in (g - a g-window) identified as (newlinkid - an object) fro
 		now p-left entry is gleft;
 		now p-right entry is gright;
 		now alt entry is linkref;
-	otherwise if the number of blank rows in the Table of Graphlink Glulx Replacement Commands is greater than 0:
+	else if the number of blank rows in the Table of Graphlink Glulx Replacement Commands > 0:
 		choose a blank row in the Table of Graphlink Glulx Replacement Commands;
 		now linkid entry is newlinkid;
 		now g-win entry is g;
@@ -341,7 +341,7 @@ To set a graphlink in (g - a g-window) identified as (newlinkid - an object) fro
 		now p-left entry is gleft;
 		now p-right entry is gright;
 		now action entry is linkref;
-	otherwise if the number of blank rows in the Table of Graphlink Glulx Replacement Commands is greater than 0:
+	else if the number of blank rows in the Table of Graphlink Glulx Replacement Commands > 0:
 		choose a blank row in the Table of Graphlink Glulx Replacement Commands;
 		now linkid entry is newlinkid;
 		now g-win entry is g;
@@ -360,7 +360,7 @@ To zero the/-- link-table:
 	repeat through the Table of Graphlink Glulx Replacement Commands:
 		blank out the whole row.
 
-	
+
 Table of Graphlink Glulx Replacement Commands
 linkid	g-win	p-top	p-bottom	p-left	p-right	replacement	alt	action
 an object	a g-window	a number	a number	a number	a number	some text	number	stored action
@@ -371,7 +371,7 @@ Part 7a - Debugging Commands (not for release)
 
 Chapter 7.1 - Debugging Graphlinks Table
 
-Debugging graphlinks is an action out of world.	Understand "graphlinks" or "graphlinks table" as debugging graphlinks. 
+Debugging graphlinks is an action out of world. Understand "graphlinks" or "graphlinks table" as debugging graphlinks.
 
 Check debugging graphlinks:
 	say "[line break][bold type]Table of Graphlink Glulx Replacement Commands[roman type] (presented in reverse order)[line break]There are [number of filled rows in the Table of Graphlink Glulx Replacement Commands] entries in the table.";
@@ -382,14 +382,14 @@ Check debugging graphlinks:
 
 Chapter 7.2a - Report window coordinates (for use without Glimmr Canvas-Based Drawing by Erik Temple)
 
-Showing clicked coordinates is an action out of world. Understand "coordinates" as showing clicked coordinates. Coordinate-trace is a truth state that varies. Coordinate-trace is false.
+Showing clicked coordinates is an action out of world. Understand "coordinates" as showing clicked coordinates. Coordinate-trace is a truth state that varies.[@Tag:NotSaved] Coordinate-trace is false.
 
 Check showing clicked coordinates:
 	If coordinate-trace is false:
 		now coordinate-trace is true;
-	otherwise:
+	else:
 		now coordinate-trace is false;
-	say "Coordinate reporting now [if coordinate-trace is true]on[otherwise]off[end if].[line break]".
+	say "Coordinate reporting now [if coordinate-trace is true]on[else]off[end if].[line break]".
 
 The report coordinates rule is listed before the default command replacement by graphlinks rule in the clicking graphlink rules.
 
@@ -400,21 +400,21 @@ A clicking graphlink rule when coordinate-trace is true (this is the report coor
 
 Chapter 7.2a - Report window and canvas coordinates (for use with Glimmr Canvas-Based Drawing by Erik Temple)
 
-Showing clicked coordinates is an action out of world. Understand "coordinates" as showing clicked coordinates. Coordinate-trace is a truth state that varies. Coordinate-trace is false.
+Showing clicked coordinates is an action out of world. Understand "coordinates" as showing clicked coordinates. Coordinate-trace is a truth state that varies.[@Tag:NotSaved] Coordinate-trace is false.
 
 Check showing clicked coordinates:
 	If coordinate-trace is false:
 		now coordinate-trace is true;
-	otherwise:
+	else:
 		now coordinate-trace is false;
-	say "Coordinate reporting now [if coordinate-trace is true]on[otherwise]off[end if].[line break]".
+	say "Coordinate reporting now [if coordinate-trace is true]on[else]off[end if].[line break]".
 
 The report coordinates rule is listed before the default command replacement by graphlinks rule in the clicking graphlink rules.
 
 A clicking graphlink rule when coordinate-trace is true (this is the report coordinates rule):
 	let graph-x be current graphlink x as a fixed point number;
 	let graph-y be current graphlink y as a fixed point number;
-	say "[line break]Window coordinates of mouse input ([current graphlink window]): ([current graphlink x],[current graphlink y])[line break]Approximate canvas coordinates: ([(graph-x real minus the x-offset of the current graphlink window) real divided by the scaling factor of the current graphlink window as an integer],[(graph-y real minus the y-offset of the current graphlink window) real divided by the scaling factor of the current graphlink window as an integer])[line break]";
+	say "[line break]Window coordinates of mouse input ([current graphlink window]): ([current graphlink x],[current graphlink y])[line break]Approximate canvas coordinates: ([(graph-x real minus the x-offset of the current graphlink window) real divided by the scaling factor of the current graphlink window to the nearest whole number],[(graph-y real minus the y-offset of the current graphlink window) real divided by the scaling factor of the current graphlink window to the nearest whole number])[line break]";
 	continue the action.
 
 
@@ -422,7 +422,7 @@ A clicking graphlink rule when coordinate-trace is true (this is the report coor
 Glimmr Graphic Hyperlinks ends here.
 
 
----- DOCUMENTATION ---- 
+---- DOCUMENTATION ----
 
 Glimmr Graphic Hyperlinks allows us to identify any number of rectangular areas of a Glulx graphic window as "hotlinked". When the player clicks within one of these zones, a command will be entered on behalf of the player, or we can specify some appropriate response of our own. Graphic links ("graphlinks") can be defined in any number of graphics windows simultaneously. At minimum, the extension requires Jon Ingold's Flexible Windows extension, which is used to define and manage the windowing system. It can also be used with Glimmr Canvas-Based Drawing to fully automate the maintenance of the list of graphlinks.
 
@@ -445,7 +445,7 @@ The list of rectangular areas that are to be hyperlinked, regardless of how many
 
 	set a graphlink in the graphics-window identified as "undo button" from 0 by 0 to 10 by 10 as "Undo"
 
-This adds a graphlink called "undo button" to the Table of Graphlink Glulx Replacement Commands. When the link is clicked it will--if we use the default rules--enter "Undo" on the command line on behalf of the player. Note the string of coordinates, which are entered LEFT by UPPER to RIGHT by LOWER. 
+This adds a graphlink called "undo button" to the Table of Graphlink Glulx Replacement Commands. When the link is clicked it will--if we use the default rules--enter "Undo" on the command line on behalf of the player. Note the string of coordinates, which are entered LEFT by UPPER to RIGHT by LOWER.
 
 There are two phrases that can be used to remove links from the table. To clear a single link:
 
@@ -476,9 +476,9 @@ The "clicking graphlink rules" are triggered when a graphlinked window receives 
 		if the click hit a hot link:
 			follow the graphlink processing rules;
 			rule succeeds;
-		otherwise:
+		else:
 			now glulx replacement command is "".
-		
+
 We look through the table for entries that apply to the window that was clicked (the "current graphlink window"), and when we find one, we test whether the click was within the bounds of that entry's rectangle. If it was, the player has successfully hit a graphlink: we pass handling off to the graphlink processing rules. Note that, when a hot link is detected, the "candidate replacement command" variable is set to the command provided when the graphlink was set up, and the "current graphlink" is set to the identifier (these are assigned within the decide phrase).
 
 If the click failed to hit a link, we simply set the glulx replacement command to null. Glulx Entry Points handles the transformation of the glulx replacement command into a "typed" command. If there is any text at all in the variable, then that text will be pasted as a command. If the glulx replacement command is null, nothing will happen except that the window will once again become receptive to input.
@@ -556,7 +556,6 @@ Section: Contact info
 
 If you have comments about the extension, please feel free to contact me directly at ek.temple@gmail.com.
 
-Please report bugs on the Google Code project page, at http://code.google.com/p/glimmr-i7x/issues/list.
+Please report bugs on the Google Code project page, at https://code.google.com/archive/p/glimmr-i7x/issues.
 
-For questions about Glimmr, please consider posting to either the rec.arts.int-fiction newsgroup or at the intfiction forum (http://www.intfiction.org/forum/). This allows questions to be public, where the answers can also benefit others. If you prefer not to use either of these forums, please contact me directly via email (ek.temple@gmail.com).
-
+For questions about Glimmr, please consider posting to either the rec.arts.int-fiction newsgroup or at the intfiction forum (https://www.intfiction.org/forum/). This allows questions to be public, where the answers can also benefit others. If you prefer not to use either of these forums, please contact me directly via email (ek.temple@gmail.com).

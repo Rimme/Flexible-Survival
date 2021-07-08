@@ -1,6 +1,6 @@
 Version 2 of Armed DR by Harry Gates begins here.
 
-"This is just a (no longer) little extension to handle weapons and fighting.  Original Armed.i7x by David Ratliff, added damage resistance support by Harry Gates"
+"This is just a (no longer) little extension to handle weapons and fighting. Original Armed.i7x by David Ratliff, added damage resistance support by Harry Gates"
 
 Section 1 - The Breath of Life
 
@@ -18,18 +18,18 @@ The present health of a person is usually 100.
 	repeat with victim running through people:
 		now the present health of the victim is the max health of the victim.]
 
-The max health of the player is usually 100.
+The max health of player is usually 100.
 
-Definition: a person is dead if his present health is less than 1.
+Definition: a person is dead if his present health < 1.
 
-Definition:  a person (called N) is alive if present health of N is greater than 0.
+Definition: a person (called N) is alive if present health of N > 0.
 
-Definition:  a person (called N) is injured if present health of N is less than max health of N.
+Definition: a person (called N) is injured if present health of N < max health of N.
 
-Definition:  a person (called N) is half dead if present health of N is less than (max health of N / 2).
+Definition: a person (called N) is half dead if present health of N < (max health of N / 2).
 
 After printing the name of a dead person (called P) (this is the I see dead people rule):
-	if the person is dead for at least 1 turn and P is on-stage, say "[apostrophe]s dead body" instead.
+	if the person is dead for at least 1 turn and P is on-stage, say "[']s dead body" instead.
 
 Section 2 - Rules and Kinds
 
@@ -84,61 +84,61 @@ if the person asked is dead, say "Dead men tell no tales. And they usually can't
 Before doing anything except searching or examining to a person (called the corpse) (this is the respect the dead rule): if the corpse is dead, say "Must you do that to [the corpse]? Have a little respect, please." instead.
 
 Check searching a person (called corpse) (this is the search a corpse rule):
-if the corpse is dead, say "You search [corpse][if the number of things carried by corpse is 0] but find nothing[otherwise] and find [the list of things carried by corpse][end if]." instead.
+if the corpse is dead, say "You search [corpse][if the number of things carried by corpse is 0] but find nothing[else] and find [the list of things carried by corpse][end if]." instead.
 
 Instead of taking inventory (this is the new inventory listing rule):
-if the number of things enclosed by the player is 0, say "You don[apostrophe]t seem to have anything at the moment.[line break](Health: [present health of the player]/[max health of the player])[line break]" instead;
-say "You are carrying: [line break]"; list the contents of the player, with newlines, indented; say "(Health: [present health of the player]/[max health of the player])[line break]".
+if the number of things enclosed by the player is 0, say "You don't seem to have anything at the moment.[line break](Health: [present health of Player]/[max health of Player])[line break]" instead;
+say "You are carrying: [line break]"; list the contents of the player, with newlines, indented; say "(Health: [present health of Player]/[max health of Player])[line break]";
 
 Report examining a person (called victim) (this is the check NPC health rule):
 	if the person is not dead, say "(Health: [present health of victim]/[max health of victim])[line break]".
 
 Check examining a dead person (called corpse) (this is the examining a corpse rule):
-	say "[Corpse] is a gruesome sight." instead.
+	say "[Corpse] is a gruesome sight." instead;
 
 Check examining the player (this is the report health rule):
-	say "You [status of the player]. (Health: [the present health of the player]/[the max health of the player])[line break]" instead.
+	say "You [status of Player]. (Health: [the present health of Player]/[the max health of Player])[line break]" instead;
 
-To say status of/for (P - a person) :
+To say status of/for (P - a person):
 	let x be the present health of P;
 	if P is the player:
 		if x is 100:
 			say "are in perfect health";
-		otherwise if x is at most 10:
+		else if x is at most 10:
 			say "are near death";
-		otherwise if x is at most 20:
+		else if x is at most 20:
 			say "are in serious condition";
-		otherwise if x is at most 30:
+		else if x is at most 30:
 			say "have taken quite a beating";
-		otherwise if x is at most 60:
-			say "have definately been better, but you could be worse";
-		otherwise if x is at most 70:
+		else if x is at most 60:
+			say "have definitely been better, but you could be worse";
+		else if x is at most 70:
 			say "are a little beaten up";
-		otherwise if x is at most 80:
+		else if x is at most 80:
 			say "can almost hide the fact that you have been in a fight";
-		otherwise if x is at most 90:
+		else if x is at most 90:
 			say "have some scrapes and bruises, but you have looked worse";
-		otherwise:
+		else:
 			say "are a little banged up, but still good-looking";
-	otherwise:
+	else:
 		if x is 100:
 			say "is in perfect health";
-		otherwise if x is at most 10:
+		else if x is at most 10:
 			say "is near death";
-		otherwise if x is at most 20:
+		else if x is at most 20:
 			say "is in serious condition";
-		otherwise if x is at most 30:
+		else if x is at most 30:
 			say "has taken quite a beating";
-		otherwise if x is at most 60:
-			say "has definately been better, but could be worse";
-		otherwise if x is at most 70:
+		else if x is at most 60:
+			say "has definitely been better, but could be worse";
+		else if x is at most 70:
 			say "is a little beaten up";
-		otherwise if x is at most 80:
+		else if x is at most 80:
 			say "can almost hide the fact that [printed name of P] has been in a fight";
-		otherwise if x is at most 90:
+		else if x is at most 90:
 			say "has some scrapes and bruises, but has looked worse";
-		otherwise:
-			say "is a little banged up, but still good-looking".
+		else:
+			say "is a little banged up, but still good-looking";
 
 Section 3 - Shooting
 
@@ -166,13 +166,13 @@ Check shooting something (called the target) with something (called the boomstic
 
 Check shooting something (called the target) with something (called the boomstick) (this is the you can't shoot something with itself rule):
 	if the target is the boomstick begin;
-		say "You try to riccochet the shot so that. . . Wait, you can't shoot [the boomstick] with itself!";
+		say "You try to ricochet the shot so that... Wait, you can't shoot [the boomstick] with itself!";
 		stop the action;
 	end if.
 
 Check shooting something (called the target) with something (called the boomstick) (this is the suicide rule):
 	if the target is the player:
-		end the story finally saying "You have commited suicide!".
+		end the story finally saying "You have committed suicide!".
 
 Carry out an actor shooting something (called the target) with something (this is the standard carry out shooting rule):
 	if the target is a person begin;
@@ -182,16 +182,16 @@ Carry out an actor shooting something (called the target) with something (this i
 		end if;
 	end if.
 
-Report shooting something (called the target) with something(called the boomstick) (this is the report shooting people rule):
+Report shooting something (called the target) with something (called the boomstick) (this is the report shooting people rule):
 	if the target is a person begin;
 		if the target is dead begin;
 			say "With one final shot from your [boomstick], [printed name of the target] drops to the ground, dead." instead;
 		end if;
-	say "You shoot [the target] with your [boomstick]. [The target] jerks back from the impact. ([The target][apostrophe]s health: [present health of the target])[line break]";
+	say "You shoot [the target] with your [boomstick]. [The target] jerks back from the impact. ([The target][']s health: [present health of the target])[line break]";
 	end if.
 
-Report shooting something (called the target) with something(called the boomstick) (this is the report shooting non-people rule):
-	if the target is not a person, say "You shoot [the target] with your [boomstick]. Well, I hope that made you feel better. Hopefully shooting [the target] won[apostrophe]t attract any unwanted attention.".
+Report shooting something (called the target) with something (called the boomstick) (this is the report shooting non-people rule):
+	if the target is not a person, say "You shoot [the target] with your [boomstick]. Well, I hope that made you feel better. Hopefully shooting [the target] won't attract any unwanted attention.".
 
 Check someone shooting something (called the target) with something (called the boomstick) (this is the others must have a projectile to shoot rule):
 	if the person asked does not carry a projectile begin;
@@ -214,20 +214,20 @@ Check someone shooting something (called the target) with something (called the 
 Check someone shooting something (called the target) with something (called the boomstick) (this is the other people suicide rule):
 	if the target is the person asked, say "[The person asked] says 'I refuse to commit suicide!'" instead.
 
-Report someone shooting something (called the target) with something(called the boomstick) (this is the report another shooting a person rule):
+Report someone shooting something (called the target) with something (called the boomstick) (this is the report another shooting a person rule):
 	if the target is a person begin;
 		if the target is dead begin;
 			say "[The person asked] shoots [printed name of the target], who drops to the ground, dead." instead;
 		end if;
 		if the target is not the player begin;
-			say "[The person asked] shoots, and [the target] jerks back from the impact. ([The target][apostrophe]s health: [present health of the target])[line break]";
+			say "[The person asked] shoots, and [the target] jerks back from the impact. ([The target][']s health: [present health of the target])[line break]";
 		end if;
 		if the target is the player begin;
-			say "[The person asked] shoots you! (Health: [present health of the player])[line break]";
+			say "[The person asked] shoots you! (Health: [present health of Player])[line break]";
 		end if;
 	end if.
 
-Report someone shooting something (called the target) with something(called the boomstick) (this is the report another shooting a non-person rule):
+Report someone shooting something (called the target) with something (called the boomstick) (this is the report another shooting a non-person rule):
 	if the target is not a person, say "In a seemingly random act of violence, [the person asked] shoots [the target].".
 
 After someone shooting something (called the target) with something (called the boomstick) (this is the shot to death rule):
@@ -266,13 +266,13 @@ Check stabbing something (called the target) with something (called the pigstick
 
 Check stabbing something (called the target) with something (called the pigsticker) (this is the you can't stab something with itself rule):
 	if the target is the pigsticker begin;
-		say "You try to break the blade so that. . . Wait, you can't stab [the pigsticker] with itself!";
+		say "You try to break the blade so that... Wait, you can't stab [the pigsticker] with itself!";
 		stop the action;
 	end if.
 
 Check stabbing something (called the target) with something (called the pigsticker) (this is the harikari rule):
 	if the target is the player:
-		end the story finally saying "You have commited suicide!".
+		end the story finally saying "You have committed suicide!".
 
 Carry out an actor stabbing something (called the target) with something (this is the standard carry out stabbing rule):
 	if the target is a person begin;
@@ -282,16 +282,16 @@ Carry out an actor stabbing something (called the target) with something (this i
 		end if;
 	end if.
 
-Report stabbing something (called the target) with something(called the pigsticker) (this is the report stabbing people rule):
+Report stabbing something (called the target) with something (called the pigsticker) (this is the report stabbing people rule):
 	if the target is a person begin;
 		if the target is dead begin;
 			say "With one final thrust of your [pigsticker], [printed name of the target] drops to the ground, dead." instead;
 		end if;
-	say "You stab [the target] with your [pigsticker]. [The target] yells out in pain.  ([The target][apostrophe]s health: [present health of the target])[line break]";
+	say "You stab [the target] with your [pigsticker]. [The target] yells out in pain. ([The target][']s health: [present health of the target])[line break]";
 	end if.
 
-Report stabbing something (called the target) with something(called the pigsticker) (this is the report stabbing non-people rule):
-	if the target is not a person, say "You stab [the target] with your [pigsticker]. Well, I hope that made you feel better. Hopefully stabbing [the target] won[apostrophe]t attract any unwanted attention.".
+Report stabbing something (called the target) with something (called the pigsticker) (this is the report stabbing non-people rule):
+	if the target is not a person, say "You stab [the target] with your [pigsticker]. Well, I hope that made you feel better. Hopefully stabbing [the target] won't attract any unwanted attention.".
 
 Check someone stabbing something (called the target) with something (called the pigsticker) (this is the others must have a blade to stab rule):
 	if the person asked does not carry a blade begin;
@@ -314,20 +314,20 @@ Check someone stabbing something (called the target) with something (called the 
 Check someone stabbing something (called the target) with something (called the pigsticker) (this is the other people harikari rule):
 	if the target is the person asked, say "[The person asked] says 'I refuse to commit suicide!'" instead.
 
-Report someone stabbing something (called the target) with something(called the pigsticker) (this is the report another stabbing a person rule):
+Report someone stabbing something (called the target) with something (called the pigsticker) (this is the report another stabbing a person rule):
 	if the target is a person begin;
 		if the target is dead begin;
 			say "[The person asked] stabs [printed name of the target], who drops to the ground, dead." instead;
 		end if;
 		if the target is not the player begin;
-			say "[The person asked] thrusts the [pigsticker] into [the target], who screams out in pain. ([The target][apostrophe]s health: [present health of the target])[line break]";
+			say "[The person asked] thrusts the [pigsticker] into [the target], who screams out in pain. ([The target][']s health: [present health of the target])[line break]";
 		end if;
 		if the target is the player begin;
-			say "[The person asked] stabs you! (Health: [present health of the player])[line break]";
+			say "[The person asked] stabs you! (Health: [present health of Player])[line break]";
 		end if;
 	end if.
 
-Report someone stabbing something (called the target) with something(called the pigsticker) (this is the report another stabbing a non-person rule):
+Report someone stabbing something (called the target) with something (called the pigsticker) (this is the report another stabbing a non-person rule):
 	if the target is not a person, say "In a seemingly random act of violence, [the person asked] stabs [the target].".
 
 After someone stabbing something (called the target) with something (called the pigsticker) (this is the stabbed to death rule):
@@ -366,13 +366,13 @@ Check clubbing something (called the target) with something (called the cudgel) 
 
 Check clubbing something (called the target) with something (called the cudgel) (this is the you can't club something with itself rule):
 	if the target is the cudgel begin;
-		say "You try to break the club so that. . . Wait, you can't club [the cudgel] with itself!";
+		say "You try to break the club so that... Wait, you can't club [the cudgel] with itself!";
 		stop the action;
 	end if.
 
 Check clubbing something (called the target) with something (called the cudgel) (this is the smashing self rule):
 	if the target is the player:
-		end the story finally saying "You have commited suicide!".
+		end the story finally saying "You have committed suicide!".
 
 Carry out an actor clubbing something (called the target) with something (this is the standard carry out clubbing rule):
 	if the target is a person begin;
@@ -382,16 +382,16 @@ Carry out an actor clubbing something (called the target) with something (this i
 		end if;
 	end if.
 
-Report clubbing something (called the target) with something(called the cudgel) (this is the report clubbing people rule):
+Report clubbing something (called the target) with something (called the cudgel) (this is the report clubbing people rule):
 	if the target is a person begin;
 		if the target is dead begin;
 			say "With one final hit of your [cudgel], [printed name of the target] drops to the ground, dead." instead;
 		end if;
-	say "You club [the target] with your [cudgel]. [The target] yells out in pain.  ([The target][apostrophe]s health: [present health of the target])[line break]";
+	say "You club [the target] with your [cudgel]. [The target] yells out in pain. ([The target][']s health: [present health of the target])[line break]";
 	end if.
 
-Report clubbing something (called the target) with something(called the cudgel) (this is the report clubbing non-people rule):
-	if the target is not a person, say "You club [the target] with your [cudgel]. Well, I hope that made you feel better. Hopefully clubbing [the target] won[apostrophe]t attract any unwanted attention.".
+Report clubbing something (called the target) with something (called the cudgel) (this is the report clubbing non-people rule):
+	if the target is not a person, say "You club [the target] with your [cudgel]. Well, I hope that made you feel better. Hopefully clubbing [the target] won't attract any unwanted attention.".
 
 Check someone clubbing something (called the target) with something (called the cudgel) (this is the others must have a bludgeon to club rule):
 	if the person asked does not carry a bludgeon begin;
@@ -414,20 +414,20 @@ Check someone clubbing something (called the target) with something (called the 
 Check someone clubbing something (called the target) with something (called the cudgel) (this is the other people smashing self rule):
 	if the target is the person asked, say "[The person asked] says 'I refuse to commit suicide!'" instead.
 
-Report someone clubbing something (called the target) with something(called the cudgel) (this is the report another clubbing a person rule):
+Report someone clubbing something (called the target) with something (called the cudgel) (this is the report another clubbing a person rule):
 	if the target is a person begin;
 		if the target is dead begin;
 			say "[The person asked] clubs [printed name of the target], who drops to the ground, dead." instead;
 		end if;
 		if the target is not the player begin;
-			say "[The person asked] smashes the [cudgel] into [the target], who screams out in pain. ([The target][apostrophe]s health: [present health of the target])[line break]";
+			say "[The person asked] smashes the [cudgel] into [the target], who screams out in pain. ([The target][']s health: [present health of the target])[line break]";
 		end if;
 		if the target is the player begin;
-			say "[The person asked] clubs you! (Health: [present health of the player])[line break]";
+			say "[The person asked] clubs you! (Health: [present health of Player])[line break]";
 		end if;
 	end if.
 
-Report someone clubbing something (called the target) with something(called the cudgel) (this is the report another clubbing a non-person rule):
+Report someone clubbing something (called the target) with something (called the cudgel) (this is the report another clubbing a non-person rule):
 	if the target is not a person, say "In a seemingly random act of violence, [the person asked] clubs [the target].".
 
 After someone clubbing something (called the target) with something (called the cudgel) (this is the clubbed to death rule):
@@ -453,7 +453,7 @@ Every turn (this is the fighting back rule):
 				end if;
 				if madman carries a projectile (called boomstick), try madman shooting the player with the boomstick;
 				if madman carries a blade (called pigsticker), try madman stabbing the player with the pigsticker;
-				if madman carries a bludgeon (called cudgel), try madman clubbing the player with the cudgel;				
+				if madman carries a bludgeon (called cudgel), try madman clubbing the player with the cudgel;
 			end if;
 		end if;
 	if madman is dead, change madman to docile;
@@ -473,9 +473,9 @@ This extension adds the actions shooting something with something, clubbing some
 
 Shooting a non-person thing is allowed, but has no real affect on the thing without additional rules. It is possible to make a game where the player has to shoot bottles to win a prize, or even to stop an enemy in a vehicle by shooting the tires.
 
-Stabbing a non-person thing is also allowed, but again does nothing on it's own. Again, the uses for this would depend on what the author had need to do with it.
+Stabbing a non-person thing is also allowed, but again does nothing on its own. Again, the uses for this would depend on what the author had need to do with it.
 
-Clubbing a non-person thing is also allowed, but again does nothing on it's own. Again, the uses for this would depend on what the author had need to do with it.
+Clubbing a non-person thing is also allowed, but again does nothing on its own. Again, the uses for this would depend on what the author had need to do with it.
 
 Another thing this extension does is add a few kinds: weapon (kind of thing), projectile (kind of weapon), blade (kind of weapon), bludgeon (kind of weapon), fire arm (kind of projectile), bow (kind of projectile), knife (kind of blade), club (kind of bludgeon) and sword (kind of blade). An author can create most any weapon they want using bludgeon, club, fire arm, bow, knife or sword, and they should behave properly.
 
@@ -495,7 +495,7 @@ Examining a NPC will also allow the player to see the present health of the NPC.
 
 If the player clubs, shoots or stabs another actor, that actor will become hostile. Hostile actors will take any weapon available (if there is one) and fight back.
 
-Additionally, a dead person no longer magically vanishes. A dead person, naturally, can not do anything, and little can be done to a dead person. If the need should arise, however, it is now possible to search the corpse of a fallen enemy, and take anything they may have been carrying.
+Additionally, a dead person no longer magically vanishes. A dead person, naturally, cannot do anything, and little can be done to a dead person. If the need should arise, however, it is now possible to search the corpse of a fallen enemy, and take anything they may have been carrying.
 
 Example: * Bob Fights Back! - A simple game featuring poor Bob. We can order Bob around (if we carry a weapon), or eliminate Bob. In this example, Bob will grab a weapon (if there is one available) and fight back. Using test commands may not give the desired results, as there is a 20% chance Bob will not do as he is told. After running the test me, one can restart the game to try something different. Trying test Bob will show Bob refusing to be bullied (and with luck, Bob refusing to commit suicide).
 
@@ -520,7 +520,7 @@ Example: ** Shooting Gallery - Bob invites you to shoot bottles to win a prize! 
 		Use no scoring.
 
 		When play begins:
-			say "A shady looking guy named Bob has convinced you to try your luck at shooting down six bottles with a cork gun. 'If you can do it, I[apostrophe]ll give you a teddy bear,' he promises."
+			say "A shady looking guy named Bob has convinced you to try your luck at shooting down six bottles with a cork gun. 'If you can do it, I'll give you a teddy bear,' he promises.";
 
 		Shooting gallery is a room.
 		A bottle is a kind of thing.
@@ -529,7 +529,7 @@ Example: ** Shooting Gallery - Bob invites you to shoot bottles to win a prize! 
 		A cork gun is a fire arm in shooting gallery.
 		Bob is a man in shooting gallery.
 
-		Instead of shooting Bob with the cork gun, say "Bob gives you a frightening stare and says 'You wouldn[apostrophe]t stand a chance even if that thing were real!'".
+		Instead of shooting Bob with the cork gun, say "Bob gives you a frightening stare and says 'You wouldn't stand a chance even if that thing were real!'".
 
 		Instead of doing anything to Bob, say "He glares at you and says 'Just see if you can shoot all the bottles.'"
 
@@ -543,15 +543,15 @@ Example: ** Shooting Gallery - Bob invites you to shoot bottles to win a prize! 
 		let x be the number of bottles on the table;
 		if x is 5:
 			say "Only 5 more to go";
-		otherwise if x is 4:
+		else if x is 4:
 			say "Only 4 more";
-		otherwise if x is 3:
+		else if x is 3:
 			say "Half way there";
-		otherwise if x is 2:
+		else if x is 2:
 			say "Just 2 more";
-		otherwise if x is 1:
+		else if x is 1:
 			say "Only 1 more and you win";
-		otherwise:
+		else:
 			say "You shot all of the bottles! You win the teddy bear";
 			end the story saying "You should give your newly won teddy bear to someone you love!".
 
@@ -565,7 +565,7 @@ Example: *** Trolls - Bob, king of the trolls, must be destroyed! This example s
 
 		Use no scoring.
 
-		A crossbow is a bow. The description of the crossbow is "An old crossbow. It still functions, but only barely." The maximum damage of the crossbow is 25.
+		A crossbow is a bow. Description of the crossbow is "An old crossbow. It still functions, but only barely." The maximum damage of the crossbow is 25.
 
 		A sharpened bone is a kind of knife. The maximum damage of a sharpened bone is 15.
 
@@ -574,27 +574,27 @@ Example: *** Trolls - Bob, king of the trolls, must be destroyed! This example s
 		A potion is a kind of thing.
 
 		Instead of drinking a potion:
-			if the present health of the player is less than 86 begin;
-				let elixer be a random potion carried by the player;
+			if the present health of Player < 86 begin;
+				let elixir be a random potion carried by Player;
 				say "You gulp down the vile tasting potion. 15 points have been restored to your health.";
-				change the present health of the player to the present health of the player + 15;
-				remove elixer from play;
-			otherwise;
-				say "Drinking the potion while your health is [present health of the player] will do you no good. Save it for when you need it.";
+				change the present health of Player to the present health of Player + 15;
+				remove elixir from play;
+			else;
+				say "Drinking the potion while your health is [present health of Player] will do you no good. Save it for when you need it.";
 			end if.
 
 		A troll is a kind of person. The max health of a troll is usually 40. A troll is usually hostile. Every troll carries one sharpened bone.
 
-		Forrest is a room. The description of forrest is "A lush forrest. In front of you is a cave. A peculiar odor wafts out from the cave. Strangely, you neither see nor here any animals. Will you go in?" The crossbow and one potion are here.
+		Forrest is a room. Description of forest is "A lush forest. In front of you is a cave. A peculiar odor wafts out from the cave. Strangely, you neither see nor here any animals. Will you go in?" The crossbow and one potion are here.
 
-		Cave is a room. Cave is inside from forrest. The description of cave is "A dank cave. It smells rather like trolls." A troll called a tall troll is in cave.
+		Cave is a room. Cave is inside from forest. Description of cave is "A dank cave. It smells rather like trolls." A troll called a tall troll is in cave.
 
 		Passage is north of cave. The description is "A narrow passage leading deeper into the cave." A troll called a short troll is here. It carries two potions.
 
 		Throneroom is west of passage. The description is "This is the throneroom of Bob the troll king." Bob is a troll in throneroom. The max health of Bob is 70. Bob is docile. Bob carries the old rusty sword.
 
 		After going to throneroom for the first time:
-		say "Bob the troll king looks at you and says 'I am the troll king. Leave now or I will punish you for killing my followers!'".
+			say "Bob the troll king looks at you and says 'I am the troll king. Leave now or I will punish you for killing my followers!'";
 
 		Every turn:
 			if Bob is dead, end the story saying "You have slain Bob, king of the trolls!".

@@ -1,6 +1,6 @@
 Version 1/100630 of Glulx Status Window Control (for Glulx only) by Erik Temple begins here.
 
-"Allows the author heightened control over the status line, including opening and closing it at will, using a background color rather than the default reversed-out display, specifying when the status line opens among multiple Glulx windows, or eliminating it altogether." 
+"Allows the author heightened control over the status line, including opening and closing it at will, using a background color rather than the default reversed-out display, specifying when the status line opens among multiple Glulx windows, or eliminating it altogether."
 
 Include Glulx Text Effects by Emily Short.
 
@@ -51,7 +51,7 @@ To set the/-- status window to open above the/-- main window:
 To set the/-- status window to open below the/-- main window:
 	(- statuswin_pos = 19; -);
 
-The status window position is a number that varies. The status window position variable translates into I6 as "statuswin_pos". [The initial/default value of statuswin_pos is set within the I6 VM_Initialise routine below.]
+The status window position is a number that varies.[@Tag:NotSaved] The status window position variable translates into I6 as "statuswin_pos". [The initial/default value of statuswin_pos is set within the I6 VM_Initialise routine below.]
 
 Include (-
 
@@ -64,7 +64,7 @@ Section - Phrases to set color of text grid windows
 
 [The background color must be set before the window is opened.]
 
-The status window background reversed is a truth state that varies. Status window background reversed is true.
+The status window background reversed is a truth state that varies.[@Tag:NotSaved] Status window background reversed is true.
 
 To set the background of the status window to be/-- reversed-out:
 	now status window background reversed is true;
@@ -72,16 +72,16 @@ To set the background of the status window to be/-- reversed-out:
 To set the background of the status window to be/-- colored:
 	now status window background reversed is false;
 
-To set the background color/colour of the/-- status window to (color - a glulx color value):
+To set the background color/color of the/-- status window to (color - a glulx color value):
 	(- StatusColor({color}); -)
 
-To set the background color/colour of the/-- status window to (color - a number):
+To set the background color/color of the/-- status window to (color - a number):
 	(- NStatusColor({color}); -)
 
-To set the text color/colour of the/-- status window to (color - a glulx color value):
+To set the text color/color of the/-- status window to (color - a glulx color value):
 	(- StatusTextColor({color}); -)
 
-To set the text color/colour of the/-- status window to (color - a number):
+To set the text color/color of the/-- status window to (color - a number):
 	(- NStatusTextColor({color}); -)
 
 Include (-
@@ -137,29 +137,29 @@ Include (-
 
 [ InitGlkWindow winrock i col;
 		switch(winrock){
-			
-			GG_STATUSWIN_ROCK: 
+
+			GG_STATUSWIN_ROCK:
 				rtrue;
 		}
-		
+
 		rfalse;
 
 	];
-	
+
 -) after "Definitions.i6t".
 
 [The routine for translating the color table is from Flexible Windows; we include it only if that extension is not already installed]
 
 Include (-
 
-Constant glulx_colour_table = (+Table of Common color Values+);
+Constant glulx_color_table = (+Table of Common color Values+);
 
 [ ColVal c i max;
-	max=TableRows(glulx_colour_table);
+	max=TableRows(glulx_color_table);
 	for ( i=1:i<=max:i++ ) {
-		if (TableLookUpEntry(glulx_colour_table, 1, i) ==  c) 
-			return TableLookUpEntry(glulx_colour_table, 2, i);
-	} 
+		if (TableLookUpEntry(glulx_color_table, 1, i) ==  c)
+			return TableLookUpEntry(glulx_color_table, 2, i);
+	}
 ];
 
 -)
@@ -353,12 +353,12 @@ Section - Replacement of the library's Window Color routines
 
 Include (-
 
-[ VM_SetWindowColours f b window doclear  i fwd bwd swin;
+[ VM_SetWindowcolors f b window doclear i fwd bwd swin;
     if (clr_on && f && b) {
         if (window) swin = 5-window; ! 4 for TextGrid, 3 for TextBuffer
 
-        fwd = MakeColourWord(f);
-        bwd = MakeColourWord(b);
+        fwd = MakecolorWord(f);
+        bwd = MakecolorWord(b);
         for (i=0 : i<style_NUMSTYLES: i++) {
             if (f == CLR_DEFAULT || b == CLR_DEFAULT) {  ! remove style hints
                 glk_stylehint_clear(swin, i, stylehint_TextColor);
@@ -395,21 +395,21 @@ Include (-
     }
 ];
 
-[ VM_RestoreWindowColours; ! used after UNDO: compare I6 patch L61007
-    if (clr_on) { ! check colour has been used
-        VM_SetWindowColours(clr_fg, clr_bg, 2); ! make sure both sets of variables are restored
-        VM_SetWindowColours(clr_fgstatus, clr_bgstatus, 1, true);
+[ VM_RestoreWindowcolors; ! used after UNDO: compare I6 patch L61007
+    if (clr_on) { ! check color has been used
+        VM_SetWindowcolors(clr_fg, clr_bg, 2); ! make sure both sets of variables are restored
+        VM_SetWindowcolors(clr_fgstatus, clr_bgstatus, 1, true);
         VM_ClearScreen();
     }
 ];
 
-[ MakeColourWord c;
+[ MakecolorWord c;
     if (c > 9) return c;
     c = c-2;
     return $ff0000*(c&1) + $ff00*(c&2 ~= 0) + $ff*(c&4 ~= 0);
 ];
 
--) instead of "Window Colours" in "Glulx.i6t".
+-) instead of "Window colors" in "Glulx.i6t".
 
 
 Section - Replacement of library's Glulx status line routines
@@ -438,7 +438,7 @@ Glulx Status Window Control ends here.
 
 ---- DOCUMENTATION ----
 
-Glulx Status Window Control allows an author control over many aspects of the behavior of the status window. We can control when it opens (especially useful in a situation where we have multiple windows), have it open either above or below the main text window, change the background color, close and reopen it at will, and even eliminate it entirely. 
+Glulx Status Window Control allows an author control over many aspects of the behavior of the status window. We can control when it opens (especially useful in a situation where we have multiple windows), have it open either above or below the main text window, change the background color, close and reopen it at will, and even eliminate it entirely.
 
 Glulx Status Window Control requires Emily Short's Glulx Text Effects extension, which is built into Inform. **Be sure to include Glulx Text Effects if other extensions in your project do not already do so.** Glulx Status Window Control is compatible with Simple Graphical Window, Flexible Windows, and the special customizations for the status window available in Basic Text Effects.
 
@@ -456,7 +456,7 @@ To control whether the status window opens above or below the main text window, 
 	set the status window to open above the main window
 	set the status window to open below the main window
 
-Opening above the main window is the default, so we have no real need to specify this unless we are changing the position from below to above. 
+Opening above the main window is the default, so we have no real need to specify this unless we are changing the position from below to above.
 
 If we want to close the status window, we write:
 
@@ -488,7 +488,7 @@ By default, Inform's status line appears "reversed out", with white letters on a
 
 We then specify a background color:
 
-	set the background color of the status window to g-light-grey
+	set the background color of the status window to g-light-gray
 
 If we like, we can also specify a text color:
 
@@ -514,7 +514,7 @@ Because this extension disables the status line until we explicitly open it, car
 
 	When play begins (this is the status window construction rule):
 		set the background of the status window to colored;
-		set the background color of the status window to g-light-grey;
+		set the background color of the status window to g-light-gray;
 		open the status window.
 
 	The status window construction rule is listed before the graphics window construction rule in the when play begins rules.
@@ -535,11 +535,11 @@ The "reconstruct" phrase works in the same way that the "reconstruct the status 
 	follow the current graphics drawing rule;
 
 		or
-	
+
 	open the status window;
 	reconstruct the graphics window;
 	follow the current graphics drawing rule;
-	
+
 Most interpreters will show a brief flicker when closing and reopening windows in this way.
 
 
@@ -563,19 +563,17 @@ Example: * Kaleidoscope - This simple example shows how we can change the color 
 
 	Include Flexible Windows by Jon Ingold.
 	Include Glulx Status Window Control by Erik Temple.
-	
+
 	When play begins:
 		set the background of the status window to colored;
 		set the background color of the status window to g-red;
 		open the status window.
-		
+
 	Every turn:
 		choose a random row in the Table of Common Color values;
 		set the background color of the status window to the assigned number entry;
 		choose a random row in the Table of Common Color values;
 		set the text color of the status window to the assigned number entry;
 		reconstruct the status window;
-		
+
 	The Scope is a room. "Nothing much to do here. Look around, jump, examine yourself, that kind of thing."
-
-
